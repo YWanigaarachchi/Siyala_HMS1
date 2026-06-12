@@ -15,14 +15,20 @@ const Navbar = () => {
       }
     };
     
+    // Check initial position on mount/route change
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
+
+  const isHomePage = location.pathname === '/';
+  const showNavbar = !isHomePage || isVisible;
 
   return (
     <nav 
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 text-white bg-emerald-950/90 backdrop-blur-md shadow-lg border-b border-white/10 transition-transform duration-500 ease-in-out ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        showNavbar ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
       {/* Logo Branding */}
