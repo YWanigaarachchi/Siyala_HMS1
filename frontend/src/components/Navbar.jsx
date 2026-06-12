@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -17,6 +19,9 @@ const Navbar = () => {
     
     // Check initial position on mount/route change
     handleScroll();
+    
+    // Close mobile menu on route change
+    setIsMobileMenuOpen(false);
     
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -67,9 +72,26 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Right CTA */}
-      <div>
-        <Link to="/login" className="inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
+      {/* Right CTA & Mobile Toggle */}
+      <div className="flex items-center gap-4">
+        <Link to="/login" className="hidden md:inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
+          Log In
+        </Link>
+        <button 
+          className="md:hidden p-2 text-amber-500 hover:text-amber-400 transition-colors"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`absolute top-full left-0 w-full bg-emerald-950/95 backdrop-blur-md border-b border-white/10 flex flex-col items-center py-8 gap-6 shadow-xl transition-all duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}>
+        <Link to="/" className={`text-lg font-semibold tracking-wider ${location.pathname === '/' ? 'text-amber-500' : 'text-white'}`}>Home</Link>
+        <Link to="/about" className={`text-lg font-semibold tracking-wider ${location.pathname === '/about' ? 'text-amber-500' : 'text-white'}`}>About</Link>
+        <Link to="/travel" className={`text-lg font-semibold tracking-wider ${location.pathname === '/travel' ? 'text-amber-500' : 'text-white'}`}>Travel</Link>
+        <Link to="/contact" className={`text-lg font-semibold tracking-wider ${location.pathname === '/contact' ? 'text-amber-500' : 'text-white'}`}>Contact</Link>
+        <Link to="/login" className="mt-4 px-8 py-3 text-sm font-bold tracking-wide text-emerald-950 bg-amber-500 rounded-full shadow-md">
           Log In
         </Link>
       </div>
