@@ -11,6 +11,7 @@ import Home from './pages/customer/Home';
 import About from './pages/customer/About';
 import Contact from './pages/customer/Contact';
 import Login from './pages/customer/Login';
+import Travel from './pages/customer/Travel';
 
 // Component to scroll to top on every page/route change
 const ScrollToTop = () => {
@@ -71,6 +72,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/travel" element={<Travel />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
           </Routes>
