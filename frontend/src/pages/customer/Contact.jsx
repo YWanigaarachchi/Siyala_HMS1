@@ -7,7 +7,7 @@ const Contact = () => {
       {/* ======================================= */}
       {/* HERO SECTION                            */}
       {/* ======================================= */}
-      <section className="relative bg-emerald-950 pt-32 pb-24 px-8 overflow-hidden text-center text-white">
+      <section className="relative bg-emerald-950 pt-32 pb-24 px-4 md:px-8 overflow-hidden text-center text-white">
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/4"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-800/20 rounded-full blur-3xl translate-y-1/3 translate-x-1/4"></div>
 
@@ -24,11 +24,11 @@ const Contact = () => {
       {/* ======================================= */}
       {/* MAIN CONTACT CONTENT                    */}
       {/* ======================================= */}
-      <section className="py-16 px-8 max-w-7xl mx-auto -mt-16 relative z-20">
+      <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto -mt-16 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           
           {/* LEFT: Contact Form & WhatsApp */}
-          <div className="bg-white p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-stone-100 flex flex-col">
+          <div className="bg-white p-6 md:p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-stone-100 flex flex-col">
             <h2 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Send a Message</h2>
             <p className="text-slate-500 mb-8">Fill out the form below and our team will get back to you within 24 hours.</p>
 
@@ -94,7 +94,7 @@ const Contact = () => {
             </div>
 
             {/* Map Container */}
-            <div className="bg-white p-4 rounded-3xl shadow-sm border border-stone-100 flex-grow flex flex-col min-h-[400px]">
+            <div className="bg-white p-4 rounded-3xl shadow-sm border border-stone-100 flex-grow flex flex-col min-h-[300px] md:min-h-[400px]">
               <div className="flex items-center gap-2 mb-4 px-2 text-emerald-950">
                 <MapPin className="w-5 h-5 text-amber-500" />
                 <span className="font-bold tracking-wide">Siyala Headquarters, Colombo</span>
