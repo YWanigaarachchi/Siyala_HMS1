@@ -11,6 +11,7 @@ import Home from './pages/customer/Home';
 import About from './pages/customer/About';
 import Contact from './pages/customer/Contact';
 import Login from './pages/customer/Login';
+import Register from './pages/customer/Register';
 import Travel from './pages/customer/Travel';
 
 // Component to scroll to top on every page/route change
@@ -75,6 +76,7 @@ function App() {
             <Route path="/travel" element={<Travel />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
         <Footer />
