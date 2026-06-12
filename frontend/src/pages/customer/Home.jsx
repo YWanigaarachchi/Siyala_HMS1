@@ -41,15 +41,24 @@ const Home = () => {
       >
         <div className="absolute top-0 left-0 w-full h-full bg-amber-500/5 blur-[120px] mix-blend-overlay"></div>
         <div className="relative flex flex-col items-center transform transition-transform duration-1000 scale-100 hover:scale-105">
-          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-8">
-            <div className="absolute inset-0 bg-amber-500/30 rounded-full blur-2xl animate-pulse"></div>
-            <img 
-              src="/logo.png" 
-              alt="Siyala Loading Logo" 
-              className="relative z-10 w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/30 animate-pulse"
-            />
+          <div className="relative mb-8">
+            <div className="w-32 h-32 md:w-40 md:h-40 relative">
+              {/* Spinning ring around the logo */}
+              <div className="absolute -inset-4 md:-inset-6 border-[3px] border-emerald-900/40 border-t-amber-500 border-r-amber-500 rounded-full animate-spin"></div>
+              <div className="absolute -inset-4 md:-inset-6 border-[3px] border-transparent border-b-emerald-500/50 rounded-full animate-[spin_3s_linear_infinite]"></div>
+              
+              {/* Pulsing glow */}
+              <div className="absolute inset-0 bg-amber-500/30 rounded-full blur-2xl animate-pulse"></div>
+              
+              {/* Logo */}
+              <img 
+                src="/logo.png" 
+                alt="Siyala Loading Logo" 
+                className="relative z-10 w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/20"
+              />
+            </div>
           </div>
-          <div className="w-8 h-8 border-2 border-emerald-900 border-t-amber-500 rounded-full animate-spin mt-4"></div>
+          <div className="text-amber-400 font-bold tracking-[0.3em] uppercase text-xs mt-6">Customer Web</div>
         </div>
       </div>
 
