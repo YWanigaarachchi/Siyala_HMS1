@@ -58,7 +58,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="text-amber-400 font-bold tracking-[0.3em] uppercase text-xs mt-6">Customer Web</div>
+          <h1 className="text-amber-500 font-serif font-bold tracking-[0.3em] uppercase text-2xl md:text-4xl mt-6 drop-shadow-md">SIYALA</h1>
         </div>
       </div>
 
