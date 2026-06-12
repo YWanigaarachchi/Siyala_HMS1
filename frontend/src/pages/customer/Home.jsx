@@ -14,24 +14,31 @@ const Home = () => {
   const calendarDays = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return (
-    <main className="relative flex flex-col justify-center min-h-[85vh] px-8 pt-24 overflow-hidden text-white bg-emerald-950 selection:bg-amber-600 selection:text-white">
-      {/* Background Graphic Placeholder (Using subtle gradients & patterns) */}
-      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-amber-600/30 via-emerald-900 to-emerald-950 mix-blend-overlay"></div>
+    <main className="relative flex flex-col justify-center min-h-screen px-8 pt-24 overflow-hidden text-white selection:bg-amber-600 selection:text-white">
+      
+      {/* Background Image & Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('/hero_bg.png')` }}
+      >
+        <div className="absolute inset-0 bg-emerald-950/70 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/40"></div>
+      </div>
       
       <div className="relative z-10 max-w-2xl mt-12 md:mt-0 xl:ml-12">
         {/* Main Typography */}
-        <h1 className="mb-4 text-5xl font-light leading-tight md:text-7xl font-serif">
+        <h1 className="mb-4 text-5xl font-light leading-tight md:text-7xl font-serif drop-shadow-lg">
           Welcome to <br />
           <span className="font-semibold text-amber-500">Sri Lankan</span>
         </h1>
-        <p className="mb-10 text-lg font-light tracking-wide text-emerald-100 md:text-xl">
+        <p className="mb-10 text-lg font-light tracking-wide text-emerald-50 md:text-xl drop-shadow-md">
           Multi-chain Hotel Management System
         </p>
 
         {/* Floating Search Bar */}
-        <div className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl shadow-2xl">
+        <div className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
           <div className="flex items-center flex-1 w-full gap-4 px-4 border-r border-white/20">
-            <span className="text-xs font-bold tracking-wider text-amber-500 uppercase shrink-0">Locations</span>
+            <span className="text-xs font-bold tracking-wider text-amber-400 uppercase shrink-0">Locations</span>
             <div className="flex gap-2 overflow-x-auto no-scrollbar">
               {locations.map((loc) => (
                 <button
@@ -40,7 +47,7 @@ const Home = () => {
                   className={`flex items-center gap-2 px-4 py-2 text-sm font-medium transition-all rounded-full whitespace-nowrap ${
                     selectedLocation === loc 
                       ? 'bg-amber-500 text-emerald-950 shadow-md' 
-                      : 'bg-white/10 text-white hover:bg-white/20'
+                      : 'bg-white/10 text-white hover:bg-white/30 border border-white/10'
                   }`}
                 >
                   <MapPin className="w-4 h-4" />
@@ -56,9 +63,25 @@ const Home = () => {
         </div>
       </div>
 
-      {/* --- INTERACTIVE BOOKABLE CALENDAR CARD --- */}
-      <div className="relative z-20 w-full max-w-sm mx-auto mt-12 md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 xl:right-32 md:mt-0 md:mx-0">
-        <div className="flex flex-col p-6 bg-white shadow-2xl rounded-3xl text-slate-800">
+      {/* --- CULTURAL IMAGES & INTERACTIVE BOOKABLE CALENDAR CARD --- */}
+      <div className="relative z-20 w-full max-w-3xl mx-auto mt-12 md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 xl:right-24 md:mt-0 md:mx-0 flex gap-6 items-center justify-end">
+        
+        {/* Cultural Photo Collage */}
+        <div className="hidden lg:flex flex-col gap-6 mr-4">
+          <img 
+            src="/sl_culture_1.png" 
+            alt="Sri Lankan Culture" 
+            className="w-40 h-56 object-cover rounded-2xl shadow-2xl border-4 border-white/10 transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300" 
+          />
+          <img 
+            src="/sl_culture_2.png" 
+            alt="Tropical Resort" 
+            className="w-48 h-40 object-cover rounded-2xl shadow-2xl border-4 border-white/10 transform rotate-[3deg] hover:rotate-0 transition-transform duration-300 -ml-8" 
+          />
+        </div>
+
+        {/* The Calendar Card */}
+        <div className="flex flex-col p-6 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl text-slate-800 w-full max-w-sm">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -126,6 +149,7 @@ const Home = () => {
             CHECK AVAILABILITY
           </button>
         </div>
+
       </div>
     </main>
   );
