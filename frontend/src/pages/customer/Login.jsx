@@ -47,7 +47,7 @@ const Login = () => {
       {/* ======================================= */}
       {/* RIGHT SIDE PANEL (FORM SCREEN)          */}
       {/* ======================================= */}
-      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center items-center p-8 md:p-16 relative">
+      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center items-center p-4 sm:p-8 md:p-16 relative">
         
         {/* Floating Back to Website */}
         <Link 
@@ -59,7 +59,7 @@ const Login = () => {
         </Link>
 
         {/* Form Container (Glassmorphic card) */}
-        <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-8 md:p-10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col">
+        <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-6 sm:p-8 md:p-10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col">
           
           {/* Logo and Heading */}
           <div className="text-center mb-8">
