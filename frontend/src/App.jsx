@@ -11,6 +11,7 @@ import Home from './pages/customer/Home';
 import About from './pages/customer/About';
 import Contact from './pages/customer/Contact';
 import Login from './pages/customer/Login';
+import Register from './pages/customer/Register';
 import Travel from './pages/customer/Travel';
 
 // Component to scroll to top on every page/route change
@@ -61,24 +62,34 @@ const ScrollToTopButton = () => {
   );
 };
 
+const AppContent = () => {
+  const location = useLocation();
+  const hideHeaderFooter = ['/login', '/register'].includes(location.pathname);
+
+  return (
+    <div className="flex flex-col min-h-screen relative">
+      {!hideHeaderFooter && <Navbar />}
+      <ScrollToTopButton />
+      <div className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/travel" element={<Travel />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+      {!hideHeaderFooter && <Footer />}
+    </div>
+  );
+};
+
 function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="flex flex-col min-h-screen relative">
-        <Navbar />
-        <ScrollToTopButton />
-        <div className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/travel" element={<Travel />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </div>
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
   );
 }

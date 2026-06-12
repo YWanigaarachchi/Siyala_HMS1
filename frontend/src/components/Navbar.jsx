@@ -38,13 +38,12 @@ const Navbar = () => {
         <Link to="/about" className="hover:text-amber-500 transition-colors">About</Link>
         <Link to="/travel" className="hover:text-amber-500 transition-colors">Travel</Link>
         <Link to="/contact" className="hover:text-amber-500 transition-colors">Contact</Link>
-        <Link to="/login" className="hover:text-amber-500 transition-colors">Log In</Link>
       </div>
 
       {/* Right CTA */}
       <div>
         <Link to="/login" className="inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
-          Sign Up
+          Log In
         </Link>
       </div>
     </nav>
