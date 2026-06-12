@@ -1,10 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center pt-24 pb-12 px-8 bg-stone-50 text-slate-800 selection:bg-amber-600 selection:text-white">
-      <div className="w-full max-w-md bg-white p-8 md:p-10 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col">
+      <div className="w-full max-w-md flex flex-col">
+        {/* Back Link */}
+        <Link 
+          to="/" 
+          className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-950 hover:text-amber-500 transition-colors mb-6 self-start group"
+        >
+          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+          Back to website
+        </Link>
+
+        <div className="w-full bg-white p-8 md:p-10 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-slate-100 flex flex-col">
         
         {/* Logo and Heading */}
         <div className="text-center mb-8">
@@ -129,6 +140,7 @@ const Register = () => {
             Log In
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );
