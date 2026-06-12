@@ -37,11 +37,8 @@ const Navbar = () => {
       }`}
     >
       {/* Logo Branding */}
-      <Link to="/" className="flex items-center gap-3 cursor-pointer">
-        <div className="flex items-center justify-center w-10 h-10 bg-amber-600 rounded-full shadow-lg">
-          <span className="text-xl font-bold tracking-wider text-emerald-950">S</span>
-        </div>
-        <span className="text-2xl font-semibold tracking-widest uppercase">Siyala</span>
+      <Link to="/" className="flex items-center cursor-pointer">
+        <img src="/logo.png" alt="Siyala Logo" className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg object-cover border border-amber-500/30 hover:scale-105 transition-transform" />
       </Link>
 
       {/* Center Links */}
