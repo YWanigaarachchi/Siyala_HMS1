@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Compass, Clock, ArrowRight, Star, Car } from 'lucide-react';
 
 const destinations = [
@@ -181,9 +182,9 @@ const Travel = () => {
               Need to get around? We offer a premium fleet of cars, SUVs, and private chauffeurs for your excursions or airport transfers. You can easily arrange a vehicle through our resort desk.
             </p>
           </div>
-          <button className="relative z-10 shrink-0 px-8 py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase text-sm rounded-full hover:bg-emerald-900 hover:scale-105 transition-all shadow-md">
+          <Link to="/login" className="relative z-10 shrink-0 px-8 py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase text-sm rounded-full hover:bg-emerald-900 hover:scale-105 transition-all shadow-md inline-block text-center">
             Arrange Vehicle
-          </button>
+          </Link>
         </div>
       </section>
 
