@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag } from 'lucide-react';
+import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown } from 'lucide-react';
 
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
@@ -7,6 +7,9 @@ const Home = () => {
 
   // Update time every second
   useEffect(() => {
+    // Ensure we start at the top of the page on load/refresh
+    window.scrollTo(0, 0);
+    
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
@@ -102,12 +105,21 @@ const Home = () => {
             </div>
           </div>
         </div>
+
+        {/* Scroll Down Indicator */}
+        <div 
+          onClick={() => document.getElementById('explore').scrollIntoView({ behavior: 'smooth' })}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center animate-bounce cursor-pointer text-white/70 hover:text-amber-400 transition-colors z-20"
+        >
+          <span className="text-[10px] uppercase tracking-[0.2em] mb-2 font-bold drop-shadow-md">Scroll</span>
+          <ChevronDown className="w-6 h-6 drop-shadow-md" />
+        </div>
       </main>
 
       {/* ======================================= */}
       {/* 2. EXPLORE OUR SANCTUARIES (Locations)  */}
       {/* ======================================= */}
-      <section className="py-24 px-8 max-w-7xl mx-auto">
+      <section id="explore" className="py-24 px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-bold text-emerald-950 mb-4">Explore Our Sanctuaries</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
