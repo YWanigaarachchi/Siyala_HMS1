@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
-import { MapPin, CalendarDays, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapPin, ArrowRight, Clock } from 'lucide-react';
 
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
-  const [checkInDate, setCheckInDate] = useState('2026-06-15');
-  const [checkOutDate, setCheckOutDate] = useState('2026-06-20');
+  const [currentTime, setCurrentTime] = useState(new Date());
 
-  // Helper arrays for UI rendering
+  // Update time every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
   const locations = ['Kandy Heritage', 'Hikkaduwa Beach'];
-  const daysOfWeek = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-  
-  // A simple 30-day calendar array (placeholder for layout)
-  const calendarDays = Array.from({ length: 30 }, (_, i) => i + 1);
 
   return (
     <main className="relative flex flex-col justify-center min-h-screen px-8 pt-24 overflow-hidden text-white selection:bg-amber-600 selection:text-white">
@@ -63,7 +65,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* --- CULTURAL IMAGES & INTERACTIVE BOOKABLE CALENDAR CARD --- */}
+      {/* --- CULTURAL IMAGES & LIVE CLOCK CARD --- */}
       <div className="relative z-20 w-full max-w-3xl mx-auto mt-12 md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 xl:right-24 md:mt-0 md:mx-0 flex gap-6 items-center justify-end">
         
         {/* Cultural Photo Collage */}
@@ -80,74 +82,21 @@ const Home = () => {
           />
         </div>
 
-        {/* The Calendar Card */}
-        <div className="flex flex-col p-6 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl text-slate-800 w-full max-w-sm">
-          {/* Header */}
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h3 className="text-lg font-bold text-emerald-950">Select Dates</h3>
-              <p className="text-sm text-slate-500">{selectedLocation}</p>
-            </div>
-            <div className="p-2 rounded-full bg-emerald-50 text-emerald-700">
-              <CalendarDays className="w-6 h-6" />
-            </div>
+        {/* The Live Clock Card */}
+        <div className="flex flex-col items-center justify-center p-10 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl text-slate-800 w-full max-w-sm border border-white/20">
+          <div className="p-4 mb-4 rounded-full bg-emerald-50 text-emerald-700 shadow-sm">
+            <Clock className="w-8 h-8" />
           </div>
-
-          {/* Calendar Controls */}
-          <div className="flex items-center justify-between mb-4">
-            <button className="p-1 transition-colors rounded-full hover:bg-slate-100"><ChevronLeft className="w-5 h-5" /></button>
-            <span className="font-semibold text-slate-700">June 2026</span>
-            <button className="p-1 transition-colors rounded-full hover:bg-slate-100"><ChevronRight className="w-5 h-5" /></button>
+          
+          <h3 className="text-xl font-bold text-emerald-950 mb-1">Sri Lanka Time</h3>
+          <p className="text-xs font-semibold text-amber-600 mb-8 uppercase tracking-widest">{selectedLocation}</p>
+          
+          <div className="text-5xl font-light tracking-widest text-emerald-950 mb-3 font-serif drop-shadow-sm">
+            {currentTime.toLocaleTimeString('en-US', { hour12: false })}
           </div>
-
-          {/* Days Grid */}
-          <div className="grid grid-cols-7 gap-1 mb-2">
-            {daysOfWeek.map(day => (
-              <div key={day} className="text-xs font-bold text-center text-slate-400">{day}</div>
-            ))}
+          <div className="text-md font-medium text-slate-500">
+            {currentTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
-
-          {/* Dates Grid */}
-          <div className="grid grid-cols-7 gap-1 mb-6">
-            {calendarDays.map((day) => {
-              const currentDateStr = `2026-06-${day.toString().padStart(2, '0')}`;
-              const isCheckIn = currentDateStr === checkInDate;
-              const isCheckOut = currentDateStr === checkOutDate;
-              const isSelectedRange = day >= 15 && day <= 20;
-
-              let dayClasses = "flex items-center justify-center h-10 text-sm font-medium rounded-full cursor-pointer transition-colors ";
-              
-              if (isCheckIn || isCheckOut) {
-                dayClasses += "bg-emerald-800 text-white shadow-md";
-              } else if (isSelectedRange) {
-                dayClasses += "bg-emerald-100 text-emerald-900 rounded-none";
-              } else {
-                dayClasses += "text-slate-600 hover:bg-slate-100";
-              }
-
-              return (
-                <div
-                  key={day}
-                  onClick={() => {
-                    if (!checkInDate || (checkInDate && checkOutDate)) {
-                      setCheckInDate(currentDateStr);
-                      setCheckOutDate('');
-                    } else {
-                      setCheckOutDate(currentDateStr);
-                    }
-                  }}
-                  className={dayClasses}
-                >
-                  {day}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Action Button */}
-          <button className="w-full py-4 text-sm font-bold tracking-wider text-center text-white transition-all shadow-lg rounded-xl bg-emerald-900 hover:bg-emerald-800 hover:shadow-xl active:scale-[0.98]">
-            CHECK AVAILABILITY
-          </button>
         </div>
 
       </div>
