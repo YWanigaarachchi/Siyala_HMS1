@@ -50,6 +50,14 @@ const ScrollToTopButton = () => {
 };
 
 function App() {
+  // Force scroll to top on initial website load/refresh
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen relative">
