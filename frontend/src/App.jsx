@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ArrowUp } from 'lucide-react';
 
 // Components
@@ -11,6 +11,17 @@ import Home from './pages/customer/Home';
 import About from './pages/customer/About';
 import Contact from './pages/customer/Contact';
 import Login from './pages/customer/Login';
+
+// Component to scroll to top on every page/route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,6 +63,7 @@ const ScrollToTopButton = () => {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="flex flex-col min-h-screen relative">
         <Navbar />
         <ScrollToTopButton />
