@@ -97,7 +97,7 @@ const Home = () => {
             </div>
             <p className="text-sm font-semibold text-emerald-100/80 mb-8 uppercase tracking-widest drop-shadow-md">{selectedLocation}</p>
             
-            <div className="text-7xl font-bold tracking-widest text-white mb-4 font-serif drop-shadow-[0_8px_8px_rgba(0,0,0,0.6)]">
+            <div className="text-7xl md:text-8xl font-light tracking-wider text-white mb-4 drop-shadow-[0_8px_8px_rgba(0,0,0,0.6)]">
               {currentTime.toLocaleTimeString('en-US', { hour12: true })}
             </div>
             <div className="text-xl font-light tracking-widest text-emerald-50 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] uppercase">
