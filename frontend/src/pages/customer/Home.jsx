@@ -31,7 +31,7 @@ const Home = () => {
         {/* Main Typography */}
         <h1 className="mb-4 text-5xl font-light leading-tight md:text-7xl font-serif drop-shadow-lg">
           Welcome to <br />
-          <span className="font-semibold text-amber-500">Sri Lankan</span>
+          <span className="font-semibold text-amber-500 drop-shadow-md">Sri Lankan</span>
         </h1>
         <p className="mb-10 text-lg font-light tracking-wide text-emerald-50 md:text-xl drop-shadow-md">
           Multi-chain Hotel Management System
@@ -40,7 +40,7 @@ const Home = () => {
         {/* Floating Search Bar */}
         <div className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
           <div className="flex items-center flex-1 w-full gap-4 px-4 border-r border-white/20">
-            <span className="text-xs font-bold tracking-wider text-amber-400 uppercase shrink-0">Locations</span>
+            <span className="text-xs font-bold tracking-wider text-amber-400 uppercase shrink-0 drop-shadow-sm">Locations</span>
             <div className="flex gap-2 overflow-x-auto no-scrollbar">
               {locations.map((loc) => (
                 <button
@@ -65,36 +65,35 @@ const Home = () => {
         </div>
       </div>
 
-      {/* --- CULTURAL IMAGES & LIVE CLOCK CARD --- */}
-      <div className="relative z-20 w-full max-w-3xl mx-auto mt-12 md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 xl:right-24 md:mt-0 md:mx-0 flex gap-6 items-center justify-end">
+      {/* --- CULTURAL IMAGES & FLOATING LIVE CLOCK --- */}
+      <div className="relative z-20 w-full max-w-4xl mx-auto mt-12 md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 xl:right-24 md:mt-0 md:mx-0 flex flex-col-reverse md:flex-row gap-12 items-center justify-end">
         
         {/* Cultural Photo Collage */}
-        <div className="hidden lg:flex flex-col gap-6 mr-4">
+        <div className="hidden lg:flex flex-col gap-6 mr-8">
           <img 
             src="/sl_culture_1.png" 
             alt="Sri Lankan Culture" 
-            className="w-40 h-56 object-cover rounded-2xl shadow-2xl border-4 border-white/10 transform rotate-[-2deg] hover:rotate-0 transition-transform duration-300" 
+            className="w-40 h-56 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300" 
           />
           <img 
             src="/sl_culture_2.png" 
             alt="Tropical Resort" 
-            className="w-48 h-40 object-cover rounded-2xl shadow-2xl border-4 border-white/10 transform rotate-[3deg] hover:rotate-0 transition-transform duration-300 -ml-8" 
+            className="w-48 h-40 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[4deg] hover:rotate-0 transition-transform duration-300 -ml-12" 
           />
         </div>
 
-        {/* The Live Clock Card */}
-        <div className="flex flex-col items-center justify-center p-10 bg-white/95 backdrop-blur-sm shadow-2xl rounded-3xl text-slate-800 w-full max-w-sm border border-white/20">
-          <div className="p-4 mb-4 rounded-full bg-emerald-50 text-emerald-700 shadow-sm">
-            <Clock className="w-8 h-8" />
+        {/* Floating Seamless Clock (No Box) */}
+        <div className="flex flex-col items-end text-right p-4 w-full max-w-sm">
+          <div className="flex items-center gap-3 mb-2">
+            <h3 className="text-2xl font-medium text-amber-500 tracking-[0.2em] uppercase drop-shadow-md">Sri Lanka Time</h3>
+            <Clock className="w-6 h-6 text-amber-400 drop-shadow-md" />
           </div>
+          <p className="text-sm font-semibold text-emerald-100/80 mb-8 uppercase tracking-widest drop-shadow-md">{selectedLocation}</p>
           
-          <h3 className="text-xl font-bold text-emerald-950 mb-1">Sri Lanka Time</h3>
-          <p className="text-xs font-semibold text-amber-600 mb-8 uppercase tracking-widest">{selectedLocation}</p>
-          
-          <div className="text-5xl font-light tracking-widest text-emerald-950 mb-3 font-serif drop-shadow-sm">
+          <div className="text-7xl font-bold tracking-widest text-white mb-4 font-serif drop-shadow-[0_8px_8px_rgba(0,0,0,0.6)]">
             {currentTime.toLocaleTimeString('en-US', { hour12: false })}
           </div>
-          <div className="text-md font-medium text-slate-500">
+          <div className="text-xl font-light tracking-widest text-emerald-50 drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] uppercase">
             {currentTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </div>
         </div>
