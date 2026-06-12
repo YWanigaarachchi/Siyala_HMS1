@@ -8,7 +8,7 @@ const About = () => {
       {/* ======================================= */}
       {/* HERO SECTION                            */}
       {/* ======================================= */}
-      <section className="relative bg-emerald-950 pt-32 pb-24 px-8 overflow-hidden text-center text-white">
+      <section className="relative bg-emerald-950 pt-32 pb-24 px-4 md:px-8 overflow-hidden text-center text-white">
         {/* Background Decorative Circles */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/4"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-800/20 rounded-full blur-3xl translate-y-1/3 translate-x-1/4"></div>
@@ -30,7 +30,7 @@ const About = () => {
       {/* ======================================= */}
       {/* OUR PILLARS SECTION                    */}
       {/* ======================================= */}
-      <section className="py-24 px-8 max-w-7xl mx-auto">
+      <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-4">The Siyala Philosophy</h2>
           <p className="text-slate-500 max-w-xl mx-auto text-sm md:text-base">
@@ -78,7 +78,7 @@ const About = () => {
       {/* COLLAGE & STORY                         */}
       {/* ======================================= */}
       <section className="py-20 bg-emerald-950 text-emerald-50 overflow-hidden">
-        <div className="max-w-7xl px-8 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl px-4 md:px-8 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
             <span className="text-amber-500 font-bold uppercase tracking-widest text-xs">A Blend of Eras</span>
             <h2 className="text-3xl md:text-5xl font-serif font-light leading-tight">
@@ -115,7 +115,7 @@ const About = () => {
       {/* ======================================= */}
       {/* TIMELINE SECTION                        */}
       {/* ======================================= */}
-      <section className="py-24 px-8 max-w-4xl mx-auto">
+      <section className="py-24 px-4 md:px-8 max-w-4xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950 mb-4">Our Journey</h2>
           <p className="text-slate-500 text-sm">Milestones that defined Siyala Hotels & Resorts</p>
@@ -158,8 +158,8 @@ const About = () => {
       {/* ======================================= */}
       {/* CTA SECTION                             */}
       {/* ======================================= */}
-      <section className="pb-24 px-8 max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden bg-amber-100 flex flex-col md:flex-row items-center justify-between p-12 md:p-16 shadow-md border border-amber-200">
+      <section className="pb-24 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden bg-amber-100 flex flex-col md:flex-row items-center justify-between p-8 md:p-16 shadow-md border border-amber-200">
           <div className="relative z-10 max-w-xl mb-8 md:mb-0">
             <h2 className="text-3xl font-serif font-bold text-emerald-950 mb-3">Begin Your Experience</h2>
             <p className="text-emerald-900/80">

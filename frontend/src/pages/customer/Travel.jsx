@@ -59,7 +59,7 @@ const Travel = () => {
       {/* ======================================= */}
       {/* HERO SECTION                            */}
       {/* ======================================= */}
-      <section className="relative bg-emerald-950 pt-32 pb-24 px-8 overflow-hidden text-center text-white">
+      <section className="relative bg-emerald-950 pt-32 pb-24 px-4 md:px-8 overflow-hidden text-center text-white">
         {/* Background Decorative Circles */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/4"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-800/20 rounded-full blur-3xl translate-y-1/3 translate-x-1/4"></div>
@@ -81,7 +81,7 @@ const Travel = () => {
       {/* ======================================= */}
       {/* CATEGORY FILTER BAR                     */}
       {/* ======================================= */}
-      <section className="sticky top-20 z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200 py-6 px-8">
+      <section className="sticky top-20 z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200 py-4 md:py-6 px-4 md:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
           <span className="text-emerald-950 font-bold text-lg tracking-wide">Filter by Experience</span>
           <div className="flex gap-2 overflow-x-auto max-w-full pb-1 no-scrollbar">
@@ -105,7 +105,7 @@ const Travel = () => {
       {/* ======================================= */}
       {/* DESTINATIONS GRID                       */}
       {/* ======================================= */}
-      <section className="py-16 px-8 max-w-7xl mx-auto">
+      <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {filteredDestinations.map((destination) => (
             <div 
@@ -170,8 +170,8 @@ const Travel = () => {
       {/* ======================================= */}
       {/* TRANSPORT & VEHICLES BANNER             */}
       {/* ======================================= */}
-      <section className="pb-8 px-8 max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden bg-amber-50 border border-amber-200 p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+      <section className="pb-8 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden bg-amber-50 border border-amber-200 p-6 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
           <div className="relative z-10 max-w-xl">
             <div className="flex items-center gap-2 mb-3 text-amber-600">
               <Car className="w-5 h-5" />
@@ -191,8 +191,8 @@ const Travel = () => {
       {/* ======================================= */}
       {/* EXCURSION CTA BANNER                    */}
       {/* ======================================= */}
-      <section className="py-16 px-8 max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden bg-emerald-950 text-white p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+      <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden bg-emerald-950 text-white p-6 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
           {/* Background Decorative blur */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/3"></div>
 

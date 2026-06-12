@@ -8,7 +8,7 @@ const Register = () => {
       {/* ======================================= */}
       {/* LEFT SIDE PANEL (FORM SCREEN)          */}
       {/* ======================================= */}
-      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center items-center p-8 md:p-16 relative">
+      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-center items-center p-4 sm:p-8 md:p-16 relative">
         
         {/* Floating Back to Website */}
         <Link 
@@ -20,14 +20,14 @@ const Register = () => {
         </Link>
 
         {/* Form Container (Glassmorphic card) */}
-        <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-8 md:p-10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col">
+        <div className="w-full max-w-md bg-white/[0.03] border border-white/10 p-6 sm:p-8 md:p-10 rounded-3xl backdrop-blur-xl shadow-2xl flex flex-col">
           
           {/* Logo and Heading */}
           <div className="text-center mb-6">
-            <div className="lg:hidden inline-flex items-center justify-center w-12 h-12 bg-amber-600 rounded-full shadow-md mb-4 text-emerald-950 font-bold text-2xl">
-              S
+            <div className="flex justify-center mb-6">
+              <img src="/logo.png" alt="Siyala Logo" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg object-cover border border-amber-500/30" />
             </div>
-            <h2 className="text-3xl font-serif font-bold text-white">Create Account</h2>
+            <h2 className="text-3xl font-serif font-bold text-white mb-2">Create Account</h2>
             <p className="text-xs text-emerald-100/60 mt-2">Sign up for a Siyala account to begin your journey</p>
           </div>
 
