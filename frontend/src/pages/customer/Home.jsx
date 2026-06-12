@@ -4,22 +4,55 @@ import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, C
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Update time every second
+  // Update time every second and handle loading
   useEffect(() => {
     // Ensure we start at the top of the page on load/refresh
     window.scrollTo(0, 0);
     
+    // Simulate loading for splash screen
+    const splashTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    return () => clearInterval(timer);
+    
+    return () => {
+      clearInterval(timer);
+      clearTimeout(splashTimer);
+    };
   }, []);
 
   const locations = ['Kandy Heritage', 'Hikkaduwa Beach'];
 
   return (
     <div className="bg-stone-50 text-slate-800">
+      
+      {/* ======================================= */}
+      {/* SPLASH SCREEN (LOADING)                 */}
+      {/* ======================================= */}
+      <div 
+        className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-emerald-950 transition-all duration-1000 ease-in-out ${
+          isLoading ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <div className="absolute top-0 left-0 w-full h-full bg-amber-500/5 blur-[120px] mix-blend-overlay"></div>
+        <div className="relative flex flex-col items-center transform transition-transform duration-1000 scale-100 hover:scale-105">
+          <div className="relative w-32 h-32 md:w-40 md:h-40 mb-8">
+            <div className="absolute inset-0 bg-amber-500/30 rounded-full blur-2xl animate-pulse"></div>
+            <img 
+              src="/logo.png" 
+              alt="Siyala Loading Logo" 
+              className="relative z-10 w-full h-full object-cover rounded-full shadow-2xl border border-amber-500/30 animate-pulse"
+            />
+          </div>
+          <div className="w-8 h-8 border-2 border-emerald-900 border-t-amber-500 rounded-full animate-spin mt-4"></div>
+        </div>
+      </div>
+
       {/* ======================================= */}
       {/* 1. HERO SECTION (Full Screen)           */}
       {/* ======================================= */}
