@@ -10,11 +10,8 @@ const Footer = () => {
           
           {/* Brand */}
           <div className="flex flex-col gap-6">
-            <Link to="/" className="flex items-center gap-3 cursor-pointer">
-              <div className="flex items-center justify-center w-10 h-10 bg-amber-600 rounded-full shadow-lg">
-                <span className="text-xl font-bold tracking-wider text-emerald-950">S</span>
-              </div>
-              <span className="text-2xl font-semibold tracking-widest uppercase text-white">Siyala</span>
+            <Link to="/" className="inline-flex cursor-pointer mb-2">
+              <img src="/logo.png" alt="Siyala Logo" className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-lg object-cover border border-amber-500/30 hover:scale-105 transition-transform" />
             </Link>
             <p className="text-sm leading-relaxed">
               Experience the warmth of true Sri Lankan hospitality. From centuries-old heritage architecture to vibrant tropical landscapes, our sanctuaries offer an unforgettable embrace of island culture.
