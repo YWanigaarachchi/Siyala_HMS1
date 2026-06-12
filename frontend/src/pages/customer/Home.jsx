@@ -23,7 +23,7 @@ const Home = () => {
       {/* ======================================= */}
       {/* 1. HERO SECTION (Full Screen)           */}
       {/* ======================================= */}
-      <main className="relative flex flex-col justify-center min-h-screen px-8 pt-24 overflow-hidden text-white selection:bg-amber-600 selection:text-white">
+      <main className="relative flex flex-col justify-center min-h-screen px-4 md:px-8 pt-24 overflow-hidden text-white selection:bg-amber-600 selection:text-white">
         
         {/* Background Image & Overlay */}
         <div 
@@ -119,7 +119,7 @@ const Home = () => {
       {/* ======================================= */}
       {/* 2. EXPLORE OUR SANCTUARIES (Locations)  */}
       {/* ======================================= */}
-      <section id="explore" className="py-24 px-8 max-w-7xl mx-auto">
+      <section id="explore" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-bold text-emerald-950 mb-4">Explore Our Sanctuaries</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
@@ -190,7 +190,7 @@ const Home = () => {
       {/* 3. SIGNATURE EXPERIENCES (Amenities)    */}
       {/* ======================================= */}
       <section className="py-24 bg-emerald-950 text-emerald-50">
-        <div className="max-w-7xl px-8 mx-auto">
+        <div className="max-w-7xl px-4 md:px-8 mx-auto">
           <div className="flex flex-col md:flex-row gap-12 items-center mb-16">
             <div className="flex-1">
               <h2 className="text-4xl font-serif font-bold text-amber-500 mb-4">Signature Experiences</h2>
@@ -231,7 +231,7 @@ const Home = () => {
       {/* ======================================= */}
       {/* 4. EXCLUSIVE OFFERS BANNER              */}
       {/* ======================================= */}
-      <section className="py-24 px-8 max-w-7xl mx-auto">
+      <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="relative rounded-3xl overflow-hidden bg-amber-100 flex flex-col md:flex-row items-center justify-between p-12 md:p-16 shadow-lg">
           {/* Decorative Pattern */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-amber-200 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4"></div>
