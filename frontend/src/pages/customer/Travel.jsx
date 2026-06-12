@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Compass, Clock, ArrowRight, Star } from 'lucide-react';
+import { MapPin, Compass, Clock, ArrowRight, Star, Car } from 'lucide-react';
 
 const destinations = [
   {
@@ -163,6 +163,27 @@ const Travel = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ======================================= */}
+      {/* TRANSPORT & VEHICLES BANNER             */}
+      {/* ======================================= */}
+      <section className="pb-8 px-8 max-w-7xl mx-auto">
+        <div className="relative rounded-3xl overflow-hidden bg-amber-50 border border-amber-200 p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+          <div className="relative z-10 max-w-xl">
+            <div className="flex items-center gap-2 mb-3 text-amber-600">
+              <Car className="w-5 h-5" />
+              <span className="font-bold tracking-widest uppercase text-xs">Transport Services</span>
+            </div>
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-emerald-950 mb-3">Vehicle Rentals & Chauffeurs</h3>
+            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+              Need to get around? We offer a premium fleet of cars, SUVs, and private chauffeurs for your excursions or airport transfers. You can easily arrange a vehicle through our resort desk.
+            </p>
+          </div>
+          <button className="relative z-10 shrink-0 px-8 py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase text-sm rounded-full hover:bg-emerald-900 hover:scale-105 transition-all shadow-md">
+            Arrange Vehicle
+          </button>
         </div>
       </section>
 
