@@ -6,6 +6,7 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext';
 // Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import CursorEffect from './components/CursorEffect';
 
 // Pages
 import Home from './pages/customer/Home';
@@ -85,7 +86,8 @@ const AppContent = () => {
   const hideHeaderFooter = ['/login', '/register'].includes(location.pathname);
 
   return (
-    <div className="flex flex-col min-h-screen relative">
+    <div className="flex flex-col min-h-screen relative cursor-none md:cursor-auto">
+      <CursorEffect />
       {!hideHeaderFooter && <Navbar />}
       <ScrollToTopButton />
 
