@@ -6,6 +6,7 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isWritingReview, setIsWritingReview] = useState(false);
   const [bgImage, setBgImage] = useState('/hero_bg.png');
 
   // Update time every second and handle loading
@@ -54,54 +55,106 @@ const Home = () => {
           {/* Modal Content */}
           <div className="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-300">
             <button 
-              onClick={() => setIsReviewModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors"
+              onClick={() => {
+                setIsReviewModalOpen(false);
+                setTimeout(() => setIsWritingReview(false), 300);
+              }}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors z-10"
             >
               <X className="w-5 h-5" />
             </button>
             
-            <div className="text-center mb-6">
-              <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Guest Reviews</h3>
-              <p className="text-slate-500 text-sm">See what our guests are saying about Siyala</p>
-            </div>
-            
-            <div className="flex justify-center gap-2 mb-8">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-10 h-10 text-amber-500 fill-amber-500 drop-shadow-sm transition-transform hover:scale-110 cursor-pointer" />
-              ))}
-            </div>
-            
-            <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
-              {/* Sample Review 1 */}
-              <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-emerald-950">Sarah Jenkins</span>
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
-                    ))}
+            {!isWritingReview ? (
+              <>
+                <div className="text-center mb-6">
+                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Guest Reviews</h3>
+                  <p className="text-slate-500 text-sm">See what our guests are saying about Siyala</p>
+                </div>
+                
+                <div className="flex justify-center gap-2 mb-8">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-10 h-10 text-amber-500 fill-amber-500 drop-shadow-sm transition-transform hover:scale-110 cursor-pointer" />
+                  ))}
+                </div>
+                
+                <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
+                  {/* Sample Review 1 */}
+                  <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-emerald-950">Sarah Jenkins</span>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-slate-600 text-sm leading-relaxed italic">"Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming."</p>
+                  </div>
+                  
+                  {/* Sample Review 2 */}
+                  <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-bold text-emerald-950">Michael R.</span>
+                      <div className="flex gap-0.5">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-slate-600 text-sm leading-relaxed italic">"The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!"</p>
                   </div>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed italic">"Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming."</p>
-              </div>
-              
-              {/* Sample Review 2 */}
-              <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-bold text-emerald-950">Michael R.</span>
-                  <div className="flex gap-0.5">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
-                    ))}
-                  </div>
+                
+                <button 
+                  onClick={() => setIsWritingReview(true)}
+                  className="w-full py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase rounded-xl hover:bg-emerald-900 shadow-lg hover:shadow-xl transition-all"
+                >
+                  Write a Review
+                </button>
+              </>
+            ) : (
+              <div className="animate-in slide-in-from-right-4 duration-300">
+                <button 
+                  onClick={() => setIsWritingReview(false)}
+                  className="text-emerald-700 font-bold tracking-wider uppercase text-xs hover:text-amber-600 transition-colors flex items-center gap-1 mb-6"
+                >
+                  <ArrowRight className="w-4 h-4 rotate-180" /> Back to Reviews
+                </button>
+
+                <div className="text-center mb-6 mt-2">
+                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Write a Review</h3>
+                  <p className="text-slate-500 text-sm">Share your Siyala experience with us</p>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed italic">"The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!"</p>
+
+                <form onSubmit={(e) => { 
+                  e.preventDefault(); 
+                  setIsWritingReview(false);
+                }}>
+                  <div className="mb-5">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Your Rating</label>
+                    <div className="flex gap-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star key={star} className="w-8 h-8 text-slate-300 hover:text-amber-500 hover:fill-amber-500 transition-all cursor-pointer" />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Name</label>
+                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50" placeholder="John Doe" required />
+                  </div>
+
+                  <div className="mb-8">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Your Review</label>
+                    <textarea className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 min-h-[120px] resize-none" placeholder="Tell us about your stay..." required></textarea>
+                  </div>
+
+                  <button type="submit" className="w-full py-4 bg-amber-500 text-emerald-950 font-bold tracking-widest uppercase rounded-xl hover:bg-amber-400 shadow-lg hover:shadow-xl transition-all">
+                    Submit Review
+                  </button>
+                </form>
               </div>
-            </div>
-            
-            <button className="w-full py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase rounded-xl hover:bg-emerald-900 shadow-lg hover:shadow-xl transition-all">
-              Write a Review
-            </button>
+            )}
           </div>
         </div>
       )}
