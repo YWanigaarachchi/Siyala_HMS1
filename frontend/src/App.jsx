@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { ArrowUp, MessageCircle } from 'lucide-react';
+import { ArrowUp, MessageCircle, X } from 'lucide-react';
+import { LanguageProvider, useLanguage } from './context/LanguageContext';
 
 // Components
 import Navbar from './components/Navbar';
@@ -87,6 +88,7 @@ const AppContent = () => {
     <div className="flex flex-col min-h-screen relative">
       {!hideHeaderFooter && <Navbar />}
       <ScrollToTopButton />
+
       {!hideHeaderFooter && <FloatingWhatsApp />}
       <div className="flex-grow">
         <Routes>
@@ -105,10 +107,12 @@ const AppContent = () => {
 
 function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <AppContent />
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <ScrollToTop />
+        <AppContent />
+      </Router>
+    </LanguageProvider>
   );
 }
 
