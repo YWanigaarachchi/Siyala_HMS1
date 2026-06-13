@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 const Login = () => {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen flex bg-emerald-950 text-white selection:bg-amber-600 selection:text-white">
       {/* ======================================= */}
@@ -66,14 +68,14 @@ const Login = () => {
             <div className="flex justify-center mb-6">
               <img src="/logo.png" alt="Siyala Logo" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg object-cover border border-amber-500/30" />
             </div>
-            <h2 className="text-3xl font-serif font-light text-white mb-2">Welcome Back</h2>
-            <p className="text-xs text-emerald-100/60 mt-2">Enter your credentials to access your Siyala account</p>
+            <h2 className="text-3xl font-serif font-light text-white mb-2">{t.auth.welcomeBack}</h2>
+            <p className="text-xs text-emerald-100/60 mt-2">{t.auth.signIn}</p>
           </div>
 
           {/* Form */}
           <form className="space-y-5">
             <div>
-              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-2">Email Address</label>
+              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-2">{t.auth.email}</label>
               <input 
                 type="email" 
                 className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm text-white placeholder-white/20" 
@@ -83,8 +85,8 @@ const Login = () => {
             </div>
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase">Password</label>
-                <a href="#" className="text-xs font-medium text-amber-500 hover:text-amber-400 transition-colors">Forgot password?</a>
+                <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase">{t.auth.password}</label>
+                <a href="#" className="text-xs font-medium text-amber-500 hover:text-amber-400 transition-colors">{t.auth.forgot}</a>
               </div>
               <input 
                 type="password" 
@@ -109,7 +111,7 @@ const Login = () => {
               type="submit" 
               className="w-full py-3.5 bg-amber-500 text-emerald-950 font-bold tracking-wider rounded-xl shadow-md hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm"
             >
-              LOG IN
+              {t.auth.loginBtn}
             </button>
           </form>
 
@@ -165,9 +167,9 @@ const Login = () => {
 
           {/* Redirect Link */}
           <p className="text-center text-xs text-emerald-100/50 mt-8">
-            Don't have an account?{' '}
+            {t.auth.noAccount}{' '}
             <Link to="/register" className="font-bold text-amber-500 hover:text-amber-400 transition-colors">
-              Sign Up
+              {t.auth.createAccount}
             </Link>
           </p>
         </div>
