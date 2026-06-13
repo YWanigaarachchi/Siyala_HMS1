@@ -17,6 +17,8 @@ const Home = () => {
     { id: 2, name: 'Michael R.', rating: 4, text: 'The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!' }
   ]);
 
+  const averageRating = reviews.length > 0 ? (reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length).toFixed(1) : '0.0';
+
   // Update time every second and handle loading
   useEffect(() => {
     // Ensure we start at the top of the page on load/refresh
@@ -47,7 +49,10 @@ const Home = () => {
         onClick={() => setIsReviewModalOpen(true)}
         className="fixed right-0 top-1/2 -translate-y-1/2 bg-amber-500 text-emerald-950 px-3 py-4 rounded-l-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] z-50 flex flex-col items-center gap-2 hover:bg-amber-400 transition-all hover:-translate-x-1 border border-r-0 border-amber-300"
       >
-        <Star className="w-5 h-5 fill-emerald-950" />
+        <div className="flex flex-col items-center gap-1 bg-white/30 px-1 py-1.5 rounded-lg mb-1">
+          <span className="font-black text-lg leading-none">{averageRating}</span>
+          <Star className="w-3 h-3 fill-emerald-950" />
+        </div>
         <span className="font-bold text-xs tracking-widest [writing-mode:vertical-lr] rotate-180 mt-1">REVIEWS</span>
       </button>
 
@@ -75,15 +80,25 @@ const Home = () => {
             {!isWritingReview ? (
               <>
                 <div className="text-center mb-6">
-                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Guest Reviews</h3>
-                  <p className="text-slate-500 text-sm">See what our guests are saying about Siyala</p>
+                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-4">Guest Reviews</h3>
+                  
+                  <div className="flex items-center justify-center gap-4 mb-2">
+                    <span className="text-5xl font-black text-amber-500 drop-shadow-sm">{averageRating}</span>
+                    <div className="text-left">
+                      <div className="flex gap-1 mb-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star 
+                            key={star} 
+                            className={`w-4 h-4 ${star <= Math.round(Number(averageRating)) ? 'text-amber-500 fill-amber-500' : 'text-slate-200 fill-slate-200'}`} 
+                          />
+                        ))}
+                      </div>
+                      <p className="text-slate-500 text-xs font-medium">Based on {reviews.length} reviews</p>
+                    </div>
+                  </div>
                 </div>
                 
-                <div className="flex justify-center gap-2 mb-8">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} className="w-10 h-10 text-amber-500 fill-amber-500 drop-shadow-sm transition-transform hover:scale-110 cursor-pointer" />
-                  ))}
-                </div>
+                <div className="w-full h-px bg-slate-100 mb-6"></div>
                 
                 <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
                   {reviews.map((rev) => (
