@@ -3,11 +3,19 @@ import { Mail, Phone, MapPin, Send, MessageCircle } from 'lucide-react';
 
 const Contact = () => {
   return (
-    <div className="bg-stone-50 min-h-screen text-slate-800 selection:bg-amber-600 selection:text-white">
+    <div className="bg-stone-50 min-h-screen text-slate-800 selection:bg-amber-600 selection:text-white relative">
+      {/* Fixed Background Pattern */}
+      <div 
+        className="fixed inset-0 pointer-events-none opacity-20 z-0 mix-blend-multiply" 
+        style={{ backgroundImage: `url('/sl_pattern.png')`, backgroundSize: '300px', backgroundRepeat: 'repeat' }}
+      ></div>
+      <div className="relative z-10">
       {/* ======================================= */}
       {/* HERO SECTION                            */}
       {/* ======================================= */}
       <section className="relative bg-emerald-950 pt-32 pb-24 px-4 md:px-8 overflow-hidden text-center text-white">
+        {/* Section Pattern Overlay for dark background */}
+        <div className="absolute inset-0 opacity-[0.15] mix-blend-color-dodge" style={{ backgroundImage: `url('/sl_pattern.png')`, backgroundSize: '300px', backgroundRepeat: 'repeat' }}></div>
         <div className="absolute top-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/4"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-emerald-800/20 rounded-full blur-3xl translate-y-1/3 translate-x-1/4"></div>
 
@@ -117,6 +125,7 @@ const Contact = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
