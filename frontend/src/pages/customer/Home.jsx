@@ -1,6 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown, Star, X } from 'lucide-react';
 
+const translations = {
+  en: {
+    welcome: "Welcome to",
+    sriLankan: "Sri Lankan",
+    system: "Multi-chain Hotel Management System",
+    welcoming: "Welcoming the World",
+    guests: "Guests from across the globe",
+    explore: "Explore Our Sanctuaries",
+    flag: "https://flagcdn.com/w40/gb.png"
+  },
+  si: {
+    welcome: "ආයුබෝවන්",
+    sriLankan: "ශ්‍රී ලාංකීය",
+    system: "හෝටල් කළමනාකරණ පද්ධතිය",
+    welcoming: "ලෝකයම පිළිගනිමු",
+    guests: "ලොව පුරා සිටින අමුත්තන්",
+    explore: "අපගේ නවාතැන් ගවේෂණය කරන්න",
+    flag: "https://flagcdn.com/w40/lk.png"
+  },
+  fr: {
+    welcome: "Bienvenue à",
+    sriLankan: "Srilankais",
+    system: "Système de gestion hôtelière",
+    welcoming: "Accueillir le monde",
+    guests: "Des invités du monde entier",
+    explore: "Explorez nos sanctuaires",
+    flag: "https://flagcdn.com/w40/fr.png"
+  },
+  ja: {
+    welcome: "へようこそ",
+    sriLankan: "スリランカの",
+    system: "ホテル管理システム",
+    welcoming: "世界を歓迎する",
+    guests: "世界中からのゲスト",
+    explore: "私たちの聖域を探索する",
+    flag: "https://flagcdn.com/w40/jp.png"
+  }
+};
+
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -20,6 +59,9 @@ const Home = () => {
   const averageRating = reviews.length > 0 ? (reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length).toFixed(1) : '0.0';
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [language, setLanguage] = useState('en');
+  const [isLangModalOpen, setIsLangModalOpen] = useState(false);
+  const t = translations[language];
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -58,8 +100,8 @@ const Home = () => {
       >
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
           <div className="text-center md:text-left shrink-0 flex items-center gap-3">
-            <span className="text-amber-500 font-serif font-bold text-lg md:text-xl drop-shadow-md">Welcoming the World</span>
-            <span className="hidden md:inline text-emerald-100/70 text-xs tracking-widest uppercase">Guests from across the globe</span>
+            <span className="text-amber-500 font-serif font-bold text-lg md:text-xl drop-shadow-md">{t.welcoming}</span>
+            <span className="hidden md:inline text-emerald-100/70 text-xs tracking-widest uppercase">{t.guests}</span>
           </div>
           
           <div className="flex flex-wrap justify-center items-center gap-3 md:gap-5 drop-shadow-lg">
@@ -300,21 +342,21 @@ const Home = () => {
               textShadow: "2px 2px 0 #1e293b, 4px 4px 0 #0f172a, 6px 6px 20px rgba(0,0,0,0.8)"
             }}
           >
-            Welcome to <br />
+            {t.welcome} <br />
             <span 
               className="font-black text-amber-500 block mt-2 md:mt-4"
               style={{
                 textShadow: "2px 2px 0 #d97706, 4px 4px 0 #b45309, 6px 6px 0 #78350f, 8px 8px 25px rgba(0,0,0,0.9)"
               }}
             >
-              Sri Lankan
+              {t.sriLankan}
             </span>
           </h1>
           <p 
             className="mb-10 text-lg md:text-2xl font-medium tracking-[0.15em] uppercase text-emerald-50 mt-6"
             style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.8)" }}
           >
-            Multi-chain Hotel Management System
+            {t.system}
           </p>
 
           {/* Floating Search Bar */}
@@ -398,7 +440,7 @@ const Home = () => {
       {/* ======================================= */}
       <section id="explore" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold text-emerald-950 mb-4">Explore Our Sanctuaries</h2>
+          <h2 className="text-4xl font-serif font-bold text-emerald-950 mb-4">{t.explore}</h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             From the misty cultural highlands to the sun-kissed southern coasts, discover the perfect Sri Lankan escape.
           </p>
@@ -543,6 +585,47 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Floating Language Button */}
+      <button 
+        onClick={() => setIsLangModalOpen(true)}
+        className="fixed bottom-6 left-6 bg-white text-emerald-950 p-3 rounded-full shadow-[0_5px_20px_rgba(0,0,0,0.3)] z-50 flex items-center gap-2 hover:bg-stone-100 transition-all hover:scale-110 border-2 border-emerald-950"
+      >
+        <img src={t.flag} alt="Current Language" className="w-6 h-auto rounded-sm shadow-sm" />
+      </button>
+
+      {/* Language Modal */}
+      {isLangModalOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-emerald-950/80 backdrop-blur-md transition-opacity"
+            onClick={() => setIsLangModalOpen(false)}
+          ></div>
+          <div className="relative bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setIsLangModalOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-serif font-bold text-emerald-950 mb-2">Select Language</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(translations).map(([code, data]) => (
+                <button
+                  key={code}
+                  onClick={() => { setLanguage(code); setIsLangModalOpen(false); }}
+                  className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${language === code ? 'border-amber-500 bg-amber-50 shadow-md scale-105' : 'border-slate-200 hover:border-amber-300 hover:bg-stone-50'}`}
+                >
+                  <img src={data.flag} alt={code} className="w-8 h-auto rounded-sm shadow-sm" />
+                  <span className="font-bold text-emerald-950 uppercase text-xs">{code === 'en' ? 'English' : code === 'si' ? 'Sinhala' : code === 'fr' ? 'French' : 'Japanese'}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
