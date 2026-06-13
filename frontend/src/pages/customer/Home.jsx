@@ -10,6 +10,12 @@ const Home = () => {
   const [bgImage, setBgImage] = useState('/hero_bg.png');
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const [reviewerName, setReviewerName] = useState('');
+  const [reviewText, setReviewText] = useState('');
+  const [reviews, setReviews] = useState([
+    { id: 1, name: 'Sarah Jenkins', rating: 5, text: 'Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming.' },
+    { id: 2, name: 'Michael R.', rating: 4, text: 'The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!' }
+  ]);
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -80,31 +86,22 @@ const Home = () => {
                 </div>
                 
                 <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
-                  {/* Sample Review 1 */}
-                  <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-bold text-emerald-950">Sarah Jenkins</span>
-                      <div className="flex gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
-                        ))}
+                  {reviews.map((rev) => (
+                    <div key={rev.id} className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-bold text-emerald-950">{rev.name}</span>
+                        <div className="flex gap-0.5">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <Star 
+                              key={star} 
+                              className={`w-3 h-3 ${star <= rev.rating ? 'text-amber-500 fill-amber-500' : 'text-slate-300 fill-slate-300'}`} 
+                            />
+                          ))}
+                        </div>
                       </div>
+                      <p className="text-slate-600 text-sm leading-relaxed italic">"{rev.text}"</p>
                     </div>
-                    <p className="text-slate-600 text-sm leading-relaxed italic">"Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming."</p>
-                  </div>
-                  
-                  {/* Sample Review 2 */}
-                  <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="font-bold text-emerald-950">Michael R.</span>
-                      <div className="flex gap-0.5">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
-                        ))}
-                      </div>
-                    </div>
-                    <p className="text-slate-600 text-sm leading-relaxed italic">"The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!"</p>
-                  </div>
+                  ))}
                 </div>
                 
                 <button 
@@ -129,9 +126,22 @@ const Home = () => {
                 </div>
 
                 <form onSubmit={(e) => { 
-                  e.preventDefault(); 
+                  e.preventDefault();
+                  if (rating === 0) {
+                    alert("Please select a star rating.");
+                    return;
+                  }
+                  const newReview = {
+                    id: Date.now(),
+                    name: reviewerName,
+                    rating: rating,
+                    text: reviewText
+                  };
+                  setReviews([newReview, ...reviews]);
                   setIsWritingReview(false);
                   setRating(0);
+                  setReviewerName('');
+                  setReviewText('');
                 }}>
                   <div className="mb-5">
                     <label className="block text-sm font-bold text-emerald-950 mb-2">Your Rating</label>
@@ -153,12 +163,25 @@ const Home = () => {
 
                   <div className="mb-5">
                     <label className="block text-sm font-bold text-emerald-950 mb-2">Name</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50" placeholder="John Doe" required />
+                    <input 
+                      type="text" 
+                      value={reviewerName}
+                      onChange={(e) => setReviewerName(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50" 
+                      placeholder="John Doe" 
+                      required 
+                    />
                   </div>
 
                   <div className="mb-8">
                     <label className="block text-sm font-bold text-emerald-950 mb-2">Your Review</label>
-                    <textarea className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 min-h-[120px] resize-none" placeholder="Tell us about your stay..." required></textarea>
+                    <textarea 
+                      value={reviewText}
+                      onChange={(e) => setReviewText(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 min-h-[120px] resize-none" 
+                      placeholder="Tell us about your stay..." 
+                      required
+                    ></textarea>
                   </div>
 
                   <button type="submit" className="w-full py-4 bg-amber-500 text-emerald-950 font-bold tracking-widest uppercase rounded-xl hover:bg-amber-400 shadow-lg hover:shadow-xl transition-all">
