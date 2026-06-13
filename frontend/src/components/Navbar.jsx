@@ -6,8 +6,9 @@ import { useLanguage } from '../context/LanguageContext';
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLangModalOpen, setIsLangModalOpen] = useState(false);
   const location = useLocation();
-  const { t } = useLanguage();
+  const { language, setLanguage, t, translations } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +34,8 @@ const Navbar = () => {
   const showNavbar = !isHomePage || isVisible;
 
   return (
-    <nav 
+    <>
+      <nav 
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-5 text-white bg-emerald-950/90 backdrop-blur-md shadow-lg border-b border-white/10 transition-transform duration-500 ease-in-out ${
         showNavbar ? 'translate-y-0' : '-translate-y-full'
       }`}
@@ -73,6 +75,14 @@ const Navbar = () => {
 
       {/* Right CTA & Mobile Toggle */}
       <div className="flex items-center gap-4">
+        {/* Language Selector Button */}
+        <button 
+          onClick={() => setIsLangModalOpen(true)}
+          className="flex items-center gap-2 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors border border-white/20 shadow-sm"
+        >
+          <img src={t.flag} alt="Current Language" className="w-5 h-auto rounded-sm shadow-sm" />
+        </button>
+
         <Link to="/login" className="hidden md:inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
           {t.nav.login}
         </Link>
@@ -94,7 +104,41 @@ const Navbar = () => {
           {t.nav.login}
         </Link>
       </div>
-    </nav>
+      </nav>
+
+      {/* Language Modal */}
+      {isLangModalOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          <div 
+            className="absolute inset-0 bg-emerald-950/80 backdrop-blur-md transition-opacity"
+            onClick={() => setIsLangModalOpen(false)}
+          ></div>
+          <div className="relative bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setIsLangModalOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="text-center mb-6">
+              <h3 className="text-2xl font-serif font-bold text-emerald-950 mb-2">Select Language</h3>
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              {Object.entries(translations).map(([code, data]) => (
+                <button
+                  key={code}
+                  onClick={() => { setLanguage(code); setIsLangModalOpen(false); }}
+                  className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${language === code ? 'border-amber-500 bg-amber-50 shadow-md scale-105' : 'border-slate-200 hover:border-amber-300 hover:bg-stone-50'}`}
+                >
+                  <img src={data.flag} alt={code} className="w-8 h-auto rounded-sm shadow-sm" />
+                  <span className="font-bold text-emerald-950 uppercase text-xs">{data.langName}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
