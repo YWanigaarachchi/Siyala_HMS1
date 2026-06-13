@@ -8,6 +8,8 @@ const Home = () => {
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
   const [isWritingReview, setIsWritingReview] = useState(false);
   const [bgImage, setBgImage] = useState('/hero_bg.png');
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -115,7 +117,7 @@ const Home = () => {
             ) : (
               <div className="animate-in slide-in-from-right-4 duration-300">
                 <button 
-                  onClick={() => setIsWritingReview(false)}
+                  onClick={() => { setIsWritingReview(false); setRating(0); }}
                   className="text-emerald-700 font-bold tracking-wider uppercase text-xs hover:text-amber-600 transition-colors flex items-center gap-1 mb-6"
                 >
                   <ArrowRight className="w-4 h-4 rotate-180" /> Back to Reviews
@@ -129,12 +131,22 @@ const Home = () => {
                 <form onSubmit={(e) => { 
                   e.preventDefault(); 
                   setIsWritingReview(false);
+                  setRating(0);
                 }}>
                   <div className="mb-5">
                     <label className="block text-sm font-bold text-emerald-950 mb-2">Your Rating</label>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2" onMouseLeave={() => setHoverRating(0)}>
                       {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-8 h-8 text-slate-300 hover:text-amber-500 hover:fill-amber-500 transition-all cursor-pointer" />
+                        <Star 
+                          key={star} 
+                          onClick={() => setRating(star)}
+                          onMouseEnter={() => setHoverRating(star)}
+                          className={`w-8 h-8 transition-all duration-200 cursor-pointer ${
+                            star <= (hoverRating || rating) 
+                              ? 'text-amber-500 fill-amber-500 scale-110' 
+                              : 'text-slate-300 hover:text-slate-400'
+                          }`} 
+                        />
                       ))}
                     </div>
                   </div>
