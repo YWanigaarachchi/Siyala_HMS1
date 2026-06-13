@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,32 +49,32 @@ const Navbar = () => {
           to="/" 
           className={`transition-all border-b-2 py-1 ${location.pathname === '/' ? 'text-amber-500 border-amber-500' : 'text-white/90 border-transparent hover:text-amber-400 hover:border-amber-400/50'}`}
         >
-          Home
+          {t.nav.home}
         </Link>
         <Link 
           to="/about" 
           className={`transition-all border-b-2 py-1 ${location.pathname === '/about' ? 'text-amber-500 border-amber-500' : 'text-white/90 border-transparent hover:text-amber-400 hover:border-amber-400/50'}`}
         >
-          About
+          {t.nav.about}
         </Link>
         <Link 
           to="/travel" 
           className={`transition-all border-b-2 py-1 ${location.pathname === '/travel' ? 'text-amber-500 border-amber-500' : 'text-white/90 border-transparent hover:text-amber-400 hover:border-amber-400/50'}`}
         >
-          Travel
+          {t.nav.travel}
         </Link>
         <Link 
           to="/contact" 
           className={`transition-all border-b-2 py-1 ${location.pathname === '/contact' ? 'text-amber-500 border-amber-500' : 'text-white/90 border-transparent hover:text-amber-400 hover:border-amber-400/50'}`}
         >
-          Contact
+          {t.nav.contact}
         </Link>
       </div>
 
       {/* Right CTA & Mobile Toggle */}
       <div className="flex items-center gap-4">
         <Link to="/login" className="hidden md:inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
-          Log In
+          {t.nav.login}
         </Link>
         <button 
           className="md:hidden p-2 text-amber-500 hover:text-amber-400 transition-colors"
@@ -84,12 +86,12 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div className={`absolute top-full left-0 w-full bg-emerald-950/95 backdrop-blur-md border-b border-white/10 flex flex-col items-center py-8 gap-6 shadow-xl transition-all duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-4'}`}>
-        <Link to="/" className={`text-lg font-semibold tracking-wider ${location.pathname === '/' ? 'text-amber-500' : 'text-white'}`}>Home</Link>
-        <Link to="/about" className={`text-lg font-semibold tracking-wider ${location.pathname === '/about' ? 'text-amber-500' : 'text-white'}`}>About</Link>
-        <Link to="/travel" className={`text-lg font-semibold tracking-wider ${location.pathname === '/travel' ? 'text-amber-500' : 'text-white'}`}>Travel</Link>
-        <Link to="/contact" className={`text-lg font-semibold tracking-wider ${location.pathname === '/contact' ? 'text-amber-500' : 'text-white'}`}>Contact</Link>
+        <Link to="/" className={`text-lg font-semibold tracking-wider ${location.pathname === '/' ? 'text-amber-500' : 'text-white'}`}>{t.nav.home}</Link>
+        <Link to="/about" className={`text-lg font-semibold tracking-wider ${location.pathname === '/about' ? 'text-amber-500' : 'text-white'}`}>{t.nav.about}</Link>
+        <Link to="/travel" className={`text-lg font-semibold tracking-wider ${location.pathname === '/travel' ? 'text-amber-500' : 'text-white'}`}>{t.nav.travel}</Link>
+        <Link to="/contact" className={`text-lg font-semibold tracking-wider ${location.pathname === '/contact' ? 'text-amber-500' : 'text-white'}`}>{t.nav.contact}</Link>
         <Link to="/login" className="mt-4 px-8 py-3 text-sm font-bold tracking-wide text-emerald-950 bg-amber-500 rounded-full shadow-md">
-          Log In
+          {t.nav.login}
         </Link>
       </div>
     </nav>
