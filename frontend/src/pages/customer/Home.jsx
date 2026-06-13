@@ -354,6 +354,36 @@ const Home = () => {
       </main>
 
       {/* ======================================= */}
+      {/* GLOBAL GUESTS (Flags)                   */}
+      {/* ======================================= */}
+      <section className="bg-emerald-950 border-y border-amber-500/30 py-6 px-4 md:px-8 relative z-20">
+        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-between gap-6">
+          <div className="text-center xl:text-left shrink-0">
+            <h3 className="text-amber-500 font-serif font-bold text-2xl mb-1 drop-shadow-md">Welcoming the World</h3>
+            <p className="text-emerald-100/70 text-sm tracking-widest uppercase">Guests from across the globe</p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center xl:justify-end gap-3 md:gap-5 text-3xl md:text-4xl drop-shadow-lg">
+            <span title="United States" className="hover:-translate-y-2 transition-transform cursor-pointer">🇺🇸</span>
+            <span title="United Kingdom" className="hover:-translate-y-2 transition-transform cursor-pointer">🇬🇧</span>
+            <span title="Australia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇺</span>
+            <span title="Germany" className="hover:-translate-y-2 transition-transform cursor-pointer">🇩🇪</span>
+            <span title="France" className="hover:-translate-y-2 transition-transform cursor-pointer">🇫🇷</span>
+            <span title="Japan" className="hover:-translate-y-2 transition-transform cursor-pointer">🇯🇵</span>
+            <span title="India" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇳</span>
+            <span title="China" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇳</span>
+            <span title="UAE" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇪</span>
+            <span title="Canada" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇦</span>
+            <span title="Singapore" className="hover:-translate-y-2 transition-transform cursor-pointer">🇸🇬</span>
+            <span title="Russia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇷🇺</span>
+            <span title="Italy" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇹</span>
+            <span title="South Korea" className="hover:-translate-y-2 transition-transform cursor-pointer">🇰🇷</span>
+            <span title="Netherlands" className="hover:-translate-y-2 transition-transform cursor-pointer">🇳🇱</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================= */}
       {/* 2. EXPLORE OUR SANCTUARIES (Locations)  */}
       {/* ======================================= */}
       <section id="explore" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
