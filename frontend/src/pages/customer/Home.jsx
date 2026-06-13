@@ -161,7 +161,7 @@ const Home = () => {
           </p>
 
           {/* Floating Search Bar */}
-          <div className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
+          <div style={{ display: 'none' }} className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
             <div className="flex items-center w-full md:flex-1 gap-3 md:gap-4 px-2 md:px-4 border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0">
               <span className="text-xs font-bold tracking-wider text-amber-400 uppercase shrink-0 drop-shadow-sm">Locations</span>
               <div className="flex gap-2 overflow-x-auto no-scrollbar w-full">
