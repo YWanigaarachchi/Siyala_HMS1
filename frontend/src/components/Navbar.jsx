@@ -78,9 +78,9 @@ const Navbar = () => {
         {/* Language Selector Button */}
         <button 
           onClick={() => setIsLangModalOpen(true)}
-          className="flex items-center gap-2 bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors border border-white/20 shadow-sm"
+          className="flex items-center gap-2 bg-white/10 hover:bg-white/20 hover:scale-110 hover:-translate-y-0.5 p-2.5 md:p-3 rounded-full transition-all duration-300 border border-white/30 shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_20px_rgba(251,191,36,0.3)]"
         >
-          <img src={t.flag} alt="Current Language" className="w-5 h-auto rounded-sm shadow-sm" />
+          <img src={t.flag} alt="Current Language" className="w-6 md:w-7 h-auto rounded-sm shadow-sm" />
         </button>
 
         <Link to="/login" className="hidden md:inline-block px-6 py-2.5 text-sm font-bold tracking-wide text-emerald-950 transition-all bg-amber-500 rounded-full shadow-md hover:bg-amber-400 hover:scale-105">
