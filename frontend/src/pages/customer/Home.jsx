@@ -19,11 +19,18 @@ const Home = () => {
 
   const averageRating = reviews.length > 0 ? (reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length).toFixed(1) : '0.0';
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
   // Update time every second and handle loading
   useEffect(() => {
     // Ensure we start at the top of the page on load/refresh
     window.scrollTo(0, 0);
-    
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+
     // Simulate loading for splash screen
     const splashTimer = setTimeout(() => {
       setIsLoading(false);
@@ -36,6 +43,7 @@ const Home = () => {
     return () => {
       clearInterval(timer);
       clearTimeout(splashTimer);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -44,6 +52,36 @@ const Home = () => {
   return (
     <div className="bg-stone-50 text-slate-800">
       
+      {/* Top Global Guests Banner (Hides on scroll) */}
+      <div 
+        className={`fixed top-0 left-0 w-full z-[100] bg-emerald-950/90 backdrop-blur-md border-b border-amber-500/30 py-3 px-4 md:px-8 transition-all duration-500 ease-in-out ${isScrolled ? '-translate-y-full opacity-0' : 'translate-y-0 opacity-100'}`}
+      >
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 md:gap-6">
+          <div className="text-center md:text-left shrink-0 flex items-center gap-3">
+            <span className="text-amber-500 font-serif font-bold text-lg md:text-xl drop-shadow-md">Welcoming the World</span>
+            <span className="hidden md:inline text-emerald-100/70 text-xs tracking-widest uppercase">Guests from across the globe</span>
+          </div>
+          
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-5 drop-shadow-lg">
+            <img src="https://flagcdn.com/w40/us.png" alt="United States" title="United States" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/gb.png" alt="United Kingdom" title="United Kingdom" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/au.png" alt="Australia" title="Australia" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/de.png" alt="Germany" title="Germany" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/fr.png" alt="France" title="France" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/jp.png" alt="Japan" title="Japan" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/in.png" alt="India" title="India" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/cn.png" alt="China" title="China" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/ae.png" alt="UAE" title="UAE" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/ca.png" alt="Canada" title="Canada" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/sg.png" alt="Singapore" title="Singapore" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/ru.png" alt="Russia" title="Russia" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/it.png" alt="Italy" title="Italy" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/kr.png" alt="South Korea" title="South Korea" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+            <img src="https://flagcdn.com/w40/nl.png" alt="Netherlands" title="Netherlands" className="w-7 md:w-8 h-auto rounded-sm hover:-translate-y-1 transition-transform cursor-pointer shadow-sm" />
+          </div>
+        </div>
+      </div>
+
       {/* Floating Review Tab */}
       <button 
         onClick={() => setIsReviewModalOpen(true)}
@@ -353,35 +391,7 @@ const Home = () => {
         </div>
       </main>
 
-      {/* ======================================= */}
-      {/* GLOBAL GUESTS (Flags)                   */}
-      {/* ======================================= */}
-      <section className="bg-emerald-950 border-y border-amber-500/30 py-6 px-4 md:px-8 relative z-20">
-        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-between gap-6">
-          <div className="text-center xl:text-left shrink-0">
-            <h3 className="text-amber-500 font-serif font-bold text-2xl mb-1 drop-shadow-md">Welcoming the World</h3>
-            <p className="text-emerald-100/70 text-sm tracking-widest uppercase">Guests from across the globe</p>
-          </div>
-          
-          <div className="flex flex-wrap justify-center xl:justify-end gap-3 md:gap-5 text-3xl md:text-4xl drop-shadow-lg">
-            <span title="United States" className="hover:-translate-y-2 transition-transform cursor-pointer">🇺🇸</span>
-            <span title="United Kingdom" className="hover:-translate-y-2 transition-transform cursor-pointer">🇬🇧</span>
-            <span title="Australia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇺</span>
-            <span title="Germany" className="hover:-translate-y-2 transition-transform cursor-pointer">🇩🇪</span>
-            <span title="France" className="hover:-translate-y-2 transition-transform cursor-pointer">🇫🇷</span>
-            <span title="Japan" className="hover:-translate-y-2 transition-transform cursor-pointer">🇯🇵</span>
-            <span title="India" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇳</span>
-            <span title="China" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇳</span>
-            <span title="UAE" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇪</span>
-            <span title="Canada" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇦</span>
-            <span title="Singapore" className="hover:-translate-y-2 transition-transform cursor-pointer">🇸🇬</span>
-            <span title="Russia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇷🇺</span>
-            <span title="Italy" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇹</span>
-            <span title="South Korea" className="hover:-translate-y-2 transition-transform cursor-pointer">🇰🇷</span>
-            <span title="Netherlands" className="hover:-translate-y-2 transition-transform cursor-pointer">🇳🇱</span>
-          </div>
-        </div>
-      </section>
+
 
       {/* ======================================= */}
       {/* 2. EXPLORE OUR SANCTUARIES (Locations)  */}
