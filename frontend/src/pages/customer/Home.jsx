@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown } from 'lucide-react';
+import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown, Star, X } from 'lucide-react';
 
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [isWritingReview, setIsWritingReview] = useState(false);
+  const [bgImage, setBgImage] = useState('/hero_bg.png');
+  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [reviewerName, setReviewerName] = useState('');
+  const [reviewText, setReviewText] = useState('');
+  const [reviews, setReviews] = useState([
+    { id: 1, name: 'Sarah Jenkins', rating: 5, text: 'Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming.' },
+    { id: 2, name: 'Michael R.', rating: 4, text: 'The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!' }
+  ]);
+
+  const averageRating = reviews.length > 0 ? (reviews.reduce((acc, rev) => acc + rev.rating, 0) / reviews.length).toFixed(1) : '0.0';
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -30,6 +43,171 @@ const Home = () => {
 
   return (
     <div className="bg-stone-50 text-slate-800">
+      
+      {/* Floating Review Tab */}
+      <button 
+        onClick={() => setIsReviewModalOpen(true)}
+        className="fixed right-0 top-1/2 -translate-y-1/2 bg-amber-500 text-emerald-950 px-3 py-4 rounded-l-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] z-50 flex flex-col items-center gap-2 hover:bg-amber-400 transition-all hover:-translate-x-1 border border-r-0 border-amber-300"
+      >
+        <div className="flex flex-col items-center gap-1 bg-white/30 px-1 py-1.5 rounded-lg mb-1">
+          <span className="font-black text-lg leading-none">{averageRating}</span>
+          <Star className="w-3 h-3 fill-emerald-950" />
+        </div>
+        <span className="font-bold text-xs tracking-widest [writing-mode:vertical-lr] rotate-180 mt-1">REVIEWS</span>
+      </button>
+
+      {/* Review Modal */}
+      {isReviewModalOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-emerald-950/80 backdrop-blur-md transition-opacity"
+            onClick={() => setIsReviewModalOpen(false)}
+          ></div>
+          
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => {
+                setIsReviewModalOpen(false);
+                setTimeout(() => setIsWritingReview(false), 300);
+              }}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            {!isWritingReview ? (
+              <>
+                <div className="text-center mb-6">
+                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-4">Guest Reviews</h3>
+                  
+                  <div className="flex items-center justify-center gap-4 mb-2">
+                    <span className="text-5xl font-black text-amber-500 drop-shadow-sm">{averageRating}</span>
+                    <div className="text-left">
+                      <div className="flex gap-1 mb-1">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                          <Star 
+                            key={star} 
+                            className={`w-4 h-4 ${star <= Math.round(Number(averageRating)) ? 'text-amber-500 fill-amber-500' : 'text-slate-200 fill-slate-200'}`} 
+                          />
+                        ))}
+                      </div>
+                      <p className="text-slate-500 text-xs font-medium">Based on {reviews.length} reviews</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="w-full h-px bg-slate-100 mb-6"></div>
+                
+                <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
+                  {reviews.map((rev) => (
+                    <div key={rev.id} className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="font-bold text-emerald-950">{rev.name}</span>
+                        <div className="flex gap-0.5">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <Star 
+                              key={star} 
+                              className={`w-3 h-3 ${star <= rev.rating ? 'text-amber-500 fill-amber-500' : 'text-slate-300 fill-slate-300'}`} 
+                            />
+                          ))}
+                        </div>
+                      </div>
+                      <p className="text-slate-600 text-sm leading-relaxed italic">"{rev.text}"</p>
+                    </div>
+                  ))}
+                </div>
+                
+                <button 
+                  onClick={() => setIsWritingReview(true)}
+                  className="w-full py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase rounded-xl hover:bg-emerald-900 shadow-lg hover:shadow-xl transition-all"
+                >
+                  Write a Review
+                </button>
+              </>
+            ) : (
+              <div className="animate-in slide-in-from-right-4 duration-300">
+                <button 
+                  onClick={() => { setIsWritingReview(false); setRating(0); }}
+                  className="text-emerald-700 font-bold tracking-wider uppercase text-xs hover:text-amber-600 transition-colors flex items-center gap-1 mb-6"
+                >
+                  <ArrowRight className="w-4 h-4 rotate-180" /> Back to Reviews
+                </button>
+
+                <div className="text-center mb-6 mt-2">
+                  <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Write a Review</h3>
+                  <p className="text-slate-500 text-sm">Share your Siyala experience with us</p>
+                </div>
+
+                <form onSubmit={(e) => { 
+                  e.preventDefault();
+                  if (rating === 0) {
+                    alert("Please select a star rating.");
+                    return;
+                  }
+                  const newReview = {
+                    id: Date.now(),
+                    name: reviewerName,
+                    rating: rating,
+                    text: reviewText
+                  };
+                  setReviews([newReview, ...reviews]);
+                  setIsWritingReview(false);
+                  setRating(0);
+                  setReviewerName('');
+                  setReviewText('');
+                }}>
+                  <div className="mb-5">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Your Rating</label>
+                    <div className="flex gap-2" onMouseLeave={() => setHoverRating(0)}>
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star 
+                          key={star} 
+                          onClick={() => setRating(star)}
+                          onMouseEnter={() => setHoverRating(star)}
+                          className={`w-8 h-8 transition-all duration-200 cursor-pointer ${
+                            star <= (hoverRating || rating) 
+                              ? 'text-amber-500 fill-amber-500 scale-110' 
+                              : 'text-slate-300 hover:text-slate-400'
+                          }`} 
+                        />
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-5">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Name</label>
+                    <input 
+                      type="text" 
+                      value={reviewerName}
+                      onChange={(e) => setReviewerName(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50" 
+                      placeholder="John Doe" 
+                      required 
+                    />
+                  </div>
+
+                  <div className="mb-8">
+                    <label className="block text-sm font-bold text-emerald-950 mb-2">Your Review</label>
+                    <textarea 
+                      value={reviewText}
+                      onChange={(e) => setReviewText(e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-amber-500 bg-stone-50 min-h-[120px] resize-none" 
+                      placeholder="Tell us about your stay..." 
+                      required
+                    ></textarea>
+                  </div>
+
+                  <button type="submit" className="w-full py-4 bg-amber-500 text-emerald-950 font-bold tracking-widest uppercase rounded-xl hover:bg-amber-400 shadow-lg hover:shadow-xl transition-all">
+                    Submit Review
+                  </button>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
       
       {/* ======================================= */}
       {/* SPLASH SCREEN (LOADING)                 */}
@@ -69,8 +247,8 @@ const Home = () => {
         
         {/* Background Image & Overlay */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('/hero_bg.png')` }}
+          className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
+          style={{ backgroundImage: `url('${bgImage}')` }}
         >
           <div className="absolute inset-0 bg-emerald-950/70 mix-blend-multiply"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/40"></div>
@@ -78,16 +256,31 @@ const Home = () => {
         
         <div className="relative z-10 max-w-2xl mt-12 md:mt-0 xl:ml-12">
           {/* Main Typography */}
-          <h1 className="mb-4 text-5xl font-light leading-tight md:text-7xl font-serif drop-shadow-lg">
+          <h1 
+            className="mb-4 text-6xl md:text-8xl lg:text-[7rem] font-bold leading-none font-serif tracking-tight"
+            style={{ 
+              textShadow: "2px 2px 0 #1e293b, 4px 4px 0 #0f172a, 6px 6px 20px rgba(0,0,0,0.8)"
+            }}
+          >
             Welcome to <br />
-            <span className="font-semibold text-amber-500 drop-shadow-md">Sri Lankan</span>
+            <span 
+              className="font-black text-amber-500 block mt-2 md:mt-4"
+              style={{
+                textShadow: "2px 2px 0 #d97706, 4px 4px 0 #b45309, 6px 6px 0 #78350f, 8px 8px 25px rgba(0,0,0,0.9)"
+              }}
+            >
+              Sri Lankan
+            </span>
           </h1>
-          <p className="mb-10 text-lg font-light tracking-wide text-emerald-50 md:text-xl drop-shadow-md">
+          <p 
+            className="mb-10 text-lg md:text-2xl font-medium tracking-[0.15em] uppercase text-emerald-50 mt-6"
+            style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.8)" }}
+          >
             Multi-chain Hotel Management System
           </p>
 
           {/* Floating Search Bar */}
-          <div className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
+          <div style={{ display: 'none' }} className="flex flex-col md:flex-row items-center gap-4 p-3 bg-white/10 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl">
             <div className="flex items-center w-full md:flex-1 gap-3 md:gap-4 px-2 md:px-4 border-b md:border-b-0 md:border-r border-white/20 pb-4 md:pb-0">
               <span className="text-xs font-bold tracking-wider text-amber-400 uppercase shrink-0 drop-shadow-sm">Locations</span>
               <div className="flex gap-2 overflow-x-auto no-scrollbar w-full">
@@ -122,12 +315,14 @@ const Home = () => {
             <img 
               src="/sl_culture_1.png" 
               alt="Sri Lankan Culture" 
-              className="w-40 h-56 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300" 
+              onClick={() => setBgImage('/sl_culture_1.png')}
+              className="w-40 h-56 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[-3deg] hover:rotate-0 hover:scale-105 transition-all duration-300 cursor-pointer" 
             />
             <img 
               src="/sl_culture_2.png" 
               alt="Tropical Resort" 
-              className="w-48 h-40 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[4deg] hover:rotate-0 transition-transform duration-300 -ml-12" 
+              onClick={() => setBgImage('/sl_culture_2.png')}
+              className="w-48 h-40 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[4deg] hover:rotate-0 hover:scale-105 transition-all duration-300 -ml-12 cursor-pointer" 
             />
           </div>
 
@@ -159,6 +354,36 @@ const Home = () => {
       </main>
 
       {/* ======================================= */}
+      {/* GLOBAL GUESTS (Flags)                   */}
+      {/* ======================================= */}
+      <section className="bg-emerald-950 border-y border-amber-500/30 py-6 px-4 md:px-8 relative z-20">
+        <div className="max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-between gap-6">
+          <div className="text-center xl:text-left shrink-0">
+            <h3 className="text-amber-500 font-serif font-bold text-2xl mb-1 drop-shadow-md">Welcoming the World</h3>
+            <p className="text-emerald-100/70 text-sm tracking-widest uppercase">Guests from across the globe</p>
+          </div>
+          
+          <div className="flex flex-wrap justify-center xl:justify-end gap-3 md:gap-5 text-3xl md:text-4xl drop-shadow-lg">
+            <span title="United States" className="hover:-translate-y-2 transition-transform cursor-pointer">🇺🇸</span>
+            <span title="United Kingdom" className="hover:-translate-y-2 transition-transform cursor-pointer">🇬🇧</span>
+            <span title="Australia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇺</span>
+            <span title="Germany" className="hover:-translate-y-2 transition-transform cursor-pointer">🇩🇪</span>
+            <span title="France" className="hover:-translate-y-2 transition-transform cursor-pointer">🇫🇷</span>
+            <span title="Japan" className="hover:-translate-y-2 transition-transform cursor-pointer">🇯🇵</span>
+            <span title="India" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇳</span>
+            <span title="China" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇳</span>
+            <span title="UAE" className="hover:-translate-y-2 transition-transform cursor-pointer">🇦🇪</span>
+            <span title="Canada" className="hover:-translate-y-2 transition-transform cursor-pointer">🇨🇦</span>
+            <span title="Singapore" className="hover:-translate-y-2 transition-transform cursor-pointer">🇸🇬</span>
+            <span title="Russia" className="hover:-translate-y-2 transition-transform cursor-pointer">🇷🇺</span>
+            <span title="Italy" className="hover:-translate-y-2 transition-transform cursor-pointer">🇮🇹</span>
+            <span title="South Korea" className="hover:-translate-y-2 transition-transform cursor-pointer">🇰🇷</span>
+            <span title="Netherlands" className="hover:-translate-y-2 transition-transform cursor-pointer">🇳🇱</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================= */}
       {/* 2. EXPLORE OUR SANCTUARIES (Locations)  */}
       {/* ======================================= */}
       <section id="explore" className="py-24 px-4 md:px-8 max-w-7xl mx-auto">
@@ -172,7 +397,13 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Kandy Heritage Card */}
           <div className="group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white border border-slate-100">
-            <div className="relative h-72 overflow-hidden">
+            <div 
+              className="relative h-72 overflow-hidden cursor-pointer"
+              onClick={() => {
+                setBgImage('/kandy_hotel.png');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
               <img 
                 src="/kandy_hotel.png" 
                 alt="Kandy Heritage" 
@@ -200,7 +431,13 @@ const Home = () => {
 
           {/* Hikkaduwa Beach Card */}
           <div className="group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white border border-slate-100">
-            <div className="relative h-72 overflow-hidden">
+            <div 
+              className="relative h-72 overflow-hidden cursor-pointer"
+              onClick={() => {
+                setBgImage('/hikkaduwa_hotel.png');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
               <img 
                 src="/hikkaduwa_hotel.png" 
                 alt="Hikkaduwa Beach" 
