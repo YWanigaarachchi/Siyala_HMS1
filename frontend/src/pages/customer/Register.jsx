@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
 const Register = () => {
+  const { t } = useLanguage();
   return (
     <div className="min-h-screen flex bg-emerald-950 text-white selection:bg-amber-600 selection:text-white">
       {/* ======================================= */}
@@ -27,14 +29,14 @@ const Register = () => {
             <div className="flex justify-center mb-6">
               <img src="/logo.png" alt="Siyala Logo" className="w-20 h-20 md:w-24 md:h-24 rounded-full shadow-lg object-cover border border-amber-500/30" />
             </div>
-            <h2 className="text-3xl font-serif font-bold text-white mb-2">Create Account</h2>
-            <p className="text-xs text-emerald-100/60 mt-2">Sign up for a Siyala account to begin your journey</p>
+            <h2 className="text-3xl font-serif font-bold text-white mb-2">{t.auth.createTitle}</h2>
+            <p className="text-xs text-emerald-100/60 mt-2">{t.auth.createSub}</p>
           </div>
 
           {/* Form */}
           <form className="space-y-4">
             <div>
-              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">Full Name</label>
+              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">{t.auth.name}</label>
               <input 
                 type="text" 
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm text-white placeholder-white/20" 
@@ -43,7 +45,7 @@ const Register = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">Email Address</label>
+              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">{t.auth.email}</label>
               <input 
                 type="email" 
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm text-white placeholder-white/20" 
@@ -52,7 +54,7 @@ const Register = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">Password</label>
+              <label className="block text-xs font-bold tracking-wider text-emerald-300 uppercase mb-1.5">{t.auth.password}</label>
               <input 
                 type="password" 
                 className="w-full px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm text-white placeholder-white/20" 
@@ -86,7 +88,7 @@ const Register = () => {
               type="submit" 
               className="w-full py-3 bg-amber-500 text-emerald-950 font-bold tracking-wider rounded-xl shadow-md hover:bg-amber-400 hover:scale-[1.02] active:scale-[0.98] transition-all text-sm"
             >
-              CREATE ACCOUNT
+              {t.auth.registerBtn}
             </button>
           </form>
 
@@ -140,9 +142,9 @@ const Register = () => {
 
           {/* Redirect Link */}
           <p className="text-center text-xs text-emerald-100/50 mt-6">
-            Already have an account?{' '}
+            {t.auth.alreadyHave}{' '}
             <Link to="/login" className="font-bold text-amber-500 hover:text-amber-400 transition-colors">
-              Log In
+              {t.auth.loginBtn}
             </Link>
           </p>
         </div>
