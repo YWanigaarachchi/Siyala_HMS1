@@ -6,6 +6,7 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
+  const [bgImage, setBgImage] = useState('/hero_bg.png');
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -143,8 +144,8 @@ const Home = () => {
         
         {/* Background Image & Overlay */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('/hero_bg.png')` }}
+          className="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out"
+          style={{ backgroundImage: `url('${bgImage}')` }}
         >
           <div className="absolute inset-0 bg-emerald-950/70 mix-blend-multiply"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-transparent to-emerald-950/40"></div>
@@ -211,12 +212,14 @@ const Home = () => {
             <img 
               src="/sl_culture_1.png" 
               alt="Sri Lankan Culture" 
-              className="w-40 h-56 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[-3deg] hover:rotate-0 transition-transform duration-300" 
+              onClick={() => setBgImage('/sl_culture_1.png')}
+              className="w-40 h-56 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[-3deg] hover:rotate-0 hover:scale-105 transition-all duration-300 cursor-pointer" 
             />
             <img 
               src="/sl_culture_2.png" 
               alt="Tropical Resort" 
-              className="w-48 h-40 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[4deg] hover:rotate-0 transition-transform duration-300 -ml-12" 
+              onClick={() => setBgImage('/sl_culture_2.png')}
+              className="w-48 h-40 object-cover rounded-2xl shadow-[0_10px_20px_rgba(0,0,0,0.5)] border-2 border-white/20 transform rotate-[4deg] hover:rotate-0 hover:scale-105 transition-all duration-300 -ml-12 cursor-pointer" 
             />
           </div>
 
@@ -261,7 +264,13 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Kandy Heritage Card */}
           <div className="group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white border border-slate-100">
-            <div className="relative h-72 overflow-hidden">
+            <div 
+              className="relative h-72 overflow-hidden cursor-pointer"
+              onClick={() => {
+                setBgImage('/kandy_hotel.png');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
               <img 
                 src="/kandy_hotel.png" 
                 alt="Kandy Heritage" 
@@ -289,7 +298,13 @@ const Home = () => {
 
           {/* Hikkaduwa Beach Card */}
           <div className="group rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white border border-slate-100">
-            <div className="relative h-72 overflow-hidden">
+            <div 
+              className="relative h-72 overflow-hidden cursor-pointer"
+              onClick={() => {
+                setBgImage('/hikkaduwa_hotel.png');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
               <img 
                 src="/hikkaduwa_hotel.png" 
                 alt="Hikkaduwa Beach" 
