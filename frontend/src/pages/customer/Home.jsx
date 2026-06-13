@@ -152,11 +152,26 @@ const Home = () => {
         
         <div className="relative z-10 max-w-2xl mt-12 md:mt-0 xl:ml-12">
           {/* Main Typography */}
-          <h1 className="mb-4 text-5xl font-light leading-tight md:text-7xl font-serif drop-shadow-lg">
+          <h1 
+            className="mb-4 text-6xl md:text-8xl lg:text-[7rem] font-bold leading-none font-serif tracking-tight"
+            style={{ 
+              textShadow: "2px 2px 0 #1e293b, 4px 4px 0 #0f172a, 6px 6px 20px rgba(0,0,0,0.8)"
+            }}
+          >
             Welcome to <br />
-            <span className="font-semibold text-amber-500 drop-shadow-md">Sri Lankan</span>
+            <span 
+              className="font-black text-amber-500 block mt-2 md:mt-4"
+              style={{
+                textShadow: "2px 2px 0 #d97706, 4px 4px 0 #b45309, 6px 6px 0 #78350f, 8px 8px 25px rgba(0,0,0,0.9)"
+              }}
+            >
+              Sri Lankan
+            </span>
           </h1>
-          <p className="mb-10 text-lg font-light tracking-wide text-emerald-50 md:text-xl drop-shadow-md">
+          <p 
+            className="mb-10 text-lg md:text-2xl font-medium tracking-[0.15em] uppercase text-emerald-50 mt-6"
+            style={{ textShadow: "2px 2px 5px rgba(0,0,0,0.8)" }}
+          >
             Multi-chain Hotel Management System
           </p>
 
