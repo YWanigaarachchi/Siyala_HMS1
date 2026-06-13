@@ -1,8 +1,10 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 const Footer = () => {
+  const { t } = useLanguage();
   return (
     <footer className="bg-emerald-950 pt-20 pb-10 border-t border-white/10 text-emerald-50/70">
       <div className="max-w-7xl px-4 md:px-8 mx-auto">
@@ -14,7 +16,7 @@ const Footer = () => {
               <img src="/logo.png" alt="Siyala Logo" className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-lg object-cover border border-amber-500/30 hover:scale-105 transition-transform" />
             </Link>
             <p className="text-sm leading-relaxed">
-              Experience the warmth of true Sri Lankan hospitality. From centuries-old heritage architecture to vibrant tropical landscapes, our sanctuaries offer an unforgettable embrace of island culture.
+              {t.footer.about}
             </p>
             <div className="flex items-center gap-4 mt-2">
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-amber-500 hover:text-emerald-950 transition-colors">
@@ -31,7 +33,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="flex flex-col gap-6 lg:pl-12">
-            <h4 className="text-white font-bold tracking-widest uppercase text-sm">Quick Links</h4>
+            <h4 className="text-white font-bold tracking-widest uppercase text-sm">{t.footer.quickLinks}</h4>
             <ul className="flex flex-col gap-4 text-sm font-medium">
               <li><Link to="/about" className="hover:text-amber-500 transition-colors">Our Story</Link></li>
               <li><Link to="/travel" className="hover:text-amber-500 transition-colors">Travel Guide</Link></li>
@@ -42,7 +44,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div className="flex flex-col gap-6">
-            <h4 className="text-white font-bold tracking-widest uppercase text-sm">Contact Us</h4>
+            <h4 className="text-white font-bold tracking-widest uppercase text-sm">{t.footer.contact}</h4>
             <ul className="flex flex-col gap-4 text-sm">
               <li className="flex items-start gap-3 group">
                 <MapPin className="w-5 h-5 text-amber-500 shrink-0 group-hover:scale-110 transition-transform" />
@@ -61,9 +63,9 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div className="flex flex-col gap-6">
-            <h4 className="text-white font-bold tracking-widest uppercase text-sm">Newsletter</h4>
+            <h4 className="text-white font-bold tracking-widest uppercase text-sm">{t.footer.newsletter}</h4>
             <p className="text-sm leading-relaxed">
-              Subscribe to receive updates on exclusive offers and new destinations.
+              {t.footer.newsletterSub}
             </p>
             <div className="relative mt-2">
               <input 
@@ -81,7 +83,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium tracking-wide">
-          <p>&copy; {new Date().getFullYear()} Siyala Hotels & Resorts. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Siyala Hotels & Resorts. {t.footer.rights}</p>
           <div className="flex items-center gap-6">
             <a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-amber-500 transition-colors">Terms of Service</a>
