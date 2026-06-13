@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown } from 'lucide-react';
+import { MapPin, ArrowRight, Clock, Droplets, UtensilsCrossed, Leaf, Map, Tag, ChevronDown, Star, X } from 'lucide-react';
 
 const Home = () => {
   const [selectedLocation, setSelectedLocation] = useState('Kandy Heritage');
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isLoading, setIsLoading] = useState(true);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
 
   // Update time every second and handle loading
   useEffect(() => {
@@ -30,6 +31,79 @@ const Home = () => {
 
   return (
     <div className="bg-stone-50 text-slate-800">
+      
+      {/* Floating Review Tab */}
+      <button 
+        onClick={() => setIsReviewModalOpen(true)}
+        className="fixed right-0 top-1/2 -translate-y-1/2 bg-amber-500 text-emerald-950 px-3 py-4 rounded-l-xl shadow-[0_0_15px_rgba(0,0,0,0.2)] z-50 flex flex-col items-center gap-2 hover:bg-amber-400 transition-all hover:-translate-x-1 border border-r-0 border-amber-300"
+      >
+        <Star className="w-5 h-5 fill-emerald-950" />
+        <span className="font-bold text-xs tracking-widest [writing-mode:vertical-lr] rotate-180 mt-1">REVIEWS</span>
+      </button>
+
+      {/* Review Modal */}
+      {isReviewModalOpen && (
+        <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-emerald-950/80 backdrop-blur-md transition-opacity"
+            onClick={() => setIsReviewModalOpen(false)}
+          ></div>
+          
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setIsReviewModalOpen(false)}
+              className="absolute top-4 right-4 text-slate-400 hover:text-red-500 bg-slate-100 p-2 rounded-full transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            
+            <div className="text-center mb-6">
+              <h3 className="text-3xl font-serif font-bold text-emerald-950 mb-2">Guest Reviews</h3>
+              <p className="text-slate-500 text-sm">See what our guests are saying about Siyala</p>
+            </div>
+            
+            <div className="flex justify-center gap-2 mb-8">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star key={star} className="w-10 h-10 text-amber-500 fill-amber-500 drop-shadow-sm transition-transform hover:scale-110 cursor-pointer" />
+              ))}
+            </div>
+            
+            <div className="space-y-4 mb-8 max-h-[300px] overflow-y-auto pr-2">
+              {/* Sample Review 1 */}
+              <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-bold text-emerald-950">Sarah Jenkins</span>
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed italic">"Absolutely stunning property. The Kandy Heritage resort was everything we dreamed of and more. The staff was incredibly welcoming."</p>
+              </div>
+              
+              {/* Sample Review 2 */}
+              <div className="bg-stone-50 p-5 rounded-2xl border border-stone-200 shadow-sm">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-bold text-emerald-950">Michael R.</span>
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-3 h-3 text-amber-500 fill-amber-500" />
+                    ))}
+                  </div>
+                </div>
+                <p className="text-slate-600 text-sm leading-relaxed italic">"The Hikkaduwa beachfront was perfectly maintained. Excellent food and breathtaking sunsets!"</p>
+              </div>
+            </div>
+            
+            <button className="w-full py-4 bg-emerald-950 text-amber-400 font-bold tracking-widest uppercase rounded-xl hover:bg-emerald-900 shadow-lg hover:shadow-xl transition-all">
+              Write a Review
+            </button>
+          </div>
+        </div>
+      )}
       
       {/* ======================================= */}
       {/* SPLASH SCREEN (LOADING)                 */}
