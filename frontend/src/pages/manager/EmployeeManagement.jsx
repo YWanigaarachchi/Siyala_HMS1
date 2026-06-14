@@ -36,6 +36,7 @@ const EmployeeManagement = () => {
   const [search, setSearch] = useState('');
   const [viewEmp, setViewEmp] = useState(null);
   const [isGrid, setIsGrid] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const filtered = employees.filter(e =>
     e.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -62,7 +63,10 @@ const EmployeeManagement = () => {
           <h1 className="text-2xl font-bold text-emerald-950">Employee Management</h1>
           <p className="text-stone-400 text-sm mt-1">Manage your hotel staff, roles, and departments.</p>
         </div>
-        <button className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg">
+        <button 
+          onClick={() => setShowAddModal(true)}
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg"
+        >
           <Plus className="w-4 h-4" /> Add Employee
         </button>
       </div>
@@ -217,6 +221,68 @@ const EmployeeManagement = () => {
           </div>
         </div>
       )}
+
+      {/* Add Employee Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-sm" onClick={() => setShowAddModal(false)} />
+          <div className="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95">
+            <h2 className="text-2xl font-serif font-bold text-emerald-950 mb-1">Add Employee</h2>
+            <p className="text-stone-400 text-sm mb-6">Enter details to onboard a new staff member.</p>
+            
+            <form onSubmit={(e) => { e.preventDefault(); setShowAddModal(false); }} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Full Name</label>
+                <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Role</label>
+                  <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Department</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    {Object.keys(DEPT_COLORS).map(d => <option key={d}>{d}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Location</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    <option>Kandy</option>
+                    <option>Hikkaduwa</option>
+                    <option>Both</option>
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Status</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    <option>Active</option>
+                    <option>On Leave</option>
+                    <option>Inactive</option>
+                  </select>
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Email Address</label>
+                <input required type="email" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Phone Number</label>
+                <input required type="tel" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 py-2.5 rounded-xl font-bold text-sm text-stone-500 hover:bg-stone-100 transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-emerald-950 hover:bg-amber-400 transition-colors">Add Employee</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

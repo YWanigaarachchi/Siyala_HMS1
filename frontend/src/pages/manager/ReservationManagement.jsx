@@ -27,6 +27,7 @@ const ReservationManagement = () => {
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState('All');
   const [viewReservation, setViewReservation] = useState(null);
+  const [showNewBookingModal, setShowNewBookingModal] = useState(false);
 
   const filtered = reservations.filter(r => {
     const matchSearch = r.guest.toLowerCase().includes(search.toLowerCase()) || r.id.includes(search);
@@ -53,7 +54,10 @@ const ReservationManagement = () => {
           <h1 className="text-2xl font-bold text-emerald-950">Reservation Management</h1>
           <p className="text-stone-400 text-sm mt-1">Track and manage all guest reservations across your properties.</p>
         </div>
-        <button className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg">
+        <button 
+          onClick={() => setShowNewBookingModal(true)}
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg"
+        >
           <Plus className="w-4 h-4" /> New Reservation
         </button>
       </div>
@@ -191,6 +195,74 @@ const ReservationManagement = () => {
           </div>
         </div>
       )}
+
+      {/* New Reservation Modal */}
+      {showNewBookingModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-sm" onClick={() => setShowNewBookingModal(false)} />
+          <div className="relative bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl animate-in zoom-in-95">
+            <h2 className="text-2xl font-serif font-bold text-emerald-950 mb-1">New Reservation</h2>
+            <p className="text-stone-400 text-sm mb-6">Create a new booking manually.</p>
+            
+            <form onSubmit={(e) => { e.preventDefault(); setShowNewBookingModal(false); }} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Guest Name</label>
+                  <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Email Address</label>
+                  <input required type="email" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Location</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    <option>Kandy Heritage</option>
+                    <option>Hikkaduwa Beach</option>
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Room Type</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    <option>Standard Room</option>
+                    <option>Deluxe Suite</option>
+                    <option>Ocean View</option>
+                    <option>Penthouse</option>
+                  </select>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Check-in Date</label>
+                  <input required type="date" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Check-out Date</label>
+                  <input required type="date" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Number of Guests</label>
+                  <input required type="number" min="1" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Total Amount (LKR)</label>
+                  <input required type="text" placeholder="e.g. 50000" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button type="button" onClick={() => setShowNewBookingModal(false)} className="flex-1 py-2.5 rounded-xl font-bold text-sm text-stone-500 hover:bg-stone-100 transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-emerald-950 hover:bg-amber-400 transition-colors">Create Booking</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

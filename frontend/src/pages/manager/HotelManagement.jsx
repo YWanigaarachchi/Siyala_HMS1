@@ -56,6 +56,7 @@ const HotelManagement = () => {
   const [selectedHotel, setSelectedHotel] = useState(null);
   const [isAddingRoom, setIsAddingRoom] = useState(false);
   const [newRoom, setNewRoom] = useState({ type: '', count: '', price: '' });
+  const [showAddPropertyModal, setShowAddPropertyModal] = useState(false);
 
   const handleAddRoom = (hotelId) => {
     if (!newRoom.type || !newRoom.count || !newRoom.price) return;
@@ -85,7 +86,10 @@ const HotelManagement = () => {
           <h1 className="text-2xl font-bold text-emerald-950">Hotel Management</h1>
           <p className="text-stone-400 text-sm mt-1">Manage your property portfolio, locations, and room types.</p>
         </div>
-        <button className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg">
+        <button 
+          onClick={() => setShowAddPropertyModal(true)}
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg"
+        >
           <Plus className="w-4 h-4" /> Add Property
         </button>
       </div>
@@ -201,6 +205,48 @@ const HotelManagement = () => {
           </div>
         ))}
       </div>
+
+      {/* Add Property Modal */}
+      {showAddPropertyModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-sm" onClick={() => setShowAddPropertyModal(false)} />
+          <div className="relative bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl animate-in zoom-in-95">
+            <h2 className="text-2xl font-serif font-bold text-emerald-950 mb-1">Add New Property</h2>
+            <p className="text-stone-400 text-sm mb-6">Register a new hotel or branch in the system.</p>
+            
+            <form onSubmit={(e) => { e.preventDefault(); setShowAddPropertyModal(false); }} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Property Name</label>
+                <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Location</label>
+                <input required placeholder="e.g. Galle, Southern Province" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Property Tag</label>
+                  <input required placeholder="e.g. Boutique Hotel" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Total Initial Rooms</label>
+                  <input required type="number" min="1" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Manager Name</label>
+                <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button type="button" onClick={() => setShowAddPropertyModal(false)} className="flex-1 py-2.5 rounded-xl font-bold text-sm text-stone-500 hover:bg-stone-100 transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-emerald-950 hover:bg-amber-400 transition-colors">Register Property</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
