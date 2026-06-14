@@ -39,12 +39,9 @@ const RoomStatusBadge = ({ status }) => {
 /* ── Main Page ── */
 const ManagerHome = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    const splash = setTimeout(() => setIsLoading(false), 1500);
-    return () => { clearInterval(timer); clearTimeout(splash); };
+    return () => clearInterval(timer);
   }, []);
 
   const stats = [
@@ -94,16 +91,7 @@ const ManagerHome = () => {
   return (
     <div className="space-y-8">
 
-      {/* Splash */}
-      <div className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-emerald-950 transition-all duration-700 ${isLoading ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        <div className="relative w-28 h-28 mb-6">
-          <div className="absolute -inset-5 border-[3px] border-emerald-900/40 border-t-amber-500 border-r-amber-500 rounded-full animate-spin" />
-          <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse" />
-          <img src="/logo.png" alt="Siyala" className="relative z-10 w-full h-full object-cover rounded-full border border-amber-500/20 shadow-2xl" />
-        </div>
-        <h1 className="text-amber-500 font-serif font-bold tracking-[0.3em] uppercase text-3xl">SIYALA</h1>
-        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Manager Portal</p>
-      </div>
+
 
       {/* ─── Hero Banner with Clock ─── */}
       <div className="relative rounded-3xl overflow-hidden bg-emerald-950 shadow-xl min-h-[200px] flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-6">
