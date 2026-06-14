@@ -1,14 +1,18 @@
-# Siyala_HMS1
+# Siyala HMS - Customer Web Application
 
 🛎️ Siyala is a comprehensive, multi-chain Hotel Management System built for Sri Lankan hospitality. Seamlessly manage multi-location hotels (e.g., Kandy & Hikkaduwa) from a centralized dashboard. Features advanced kitchen inventory with local vendor tracking, dynamic scaling from small Airbnbs to heritage hotels, and multi-tier analytics.
 
-## About This Branch (`Manager_Dash`)
+## About This Branch (`Customer_Web`)
 
-This branch contains the manager-facing dashboard for the Siyala Hotel Management System. It provides comprehensive tools for hotel managers to oversee operations, manage bookings, control inventory, and analyze performance across their properties.
+This branch contains the customer-facing web application where guests can:
+- Explore hotel locations, rooms, and amenities.
+- Book rooms and manage reservations seamlessly.
+- View local experiences, dining options, and special offers.
+- Manage their customer profiles and booking history.
 
 ## Application Structure & Features
 
-The `Manager_Dash` frontend is built with a modern, responsive design and includes the following key areas:
+The `Customer_Web` frontend is built with a modern, responsive design and includes the following key areas:
 
 ### 1. Global Components
 - **Navbar & Footer:** Sticky navigation and detailed footer available across all main pages.
@@ -18,14 +22,10 @@ The `Manager_Dash` frontend is built with a modern, responsive design and includ
 - **Splash Screen:** Engaging initial loading animation.
 
 ### 2. Main Pages
-- **Home (`/`):** The central hub for hotel management. Features a dynamic Sri Lankan clock, multi-location overview, booking statistics, recent bookings, room status overview, and quick access to key management modules.
-- **Hotel Management (`/hotel-management`):** Manage hotel properties, locations, and room types.
-- **Reservation Management (`/reservation-management`):** Handle all guest reservations and bookings.
-- **Inventory Management (`/inventory-management`):** Track and manage hotel inventory and supplies.
-- **Employee Management (`/employee-management`):** Manage hotel staff and employee information.
-- **Finance (`/finance`):** Financial reporting and analytics.
-- **Analytics (`/analytics`):** Advanced analytics and business intelligence.
-- **Settings (`/settings`):** System and user settings configuration.
+- **Home (`/`):** The landing page featuring a live Sri Lankan clock, dynamic background images, location highlights (Kandy Heritage & Hikkaduwa Oceanfront), signature amenities, special offers, and a guest reviews module.
+- **About Us (`/about`):** Details the Siyala philosophy, architectural legacy, and a timeline of the brand's journey since 2015.
+- **Travel Guide (`/travel`):** Curated local experiences categorized by Culture, Highlands, Wildlife, and Coastal areas, along with transport service arrangements.
+- **Contact (`/contact`):** Integrated contact form, quick WhatsApp connect, hotel contact details, and an embedded Google Map of the headquarters.
 
 ### 3. Authentication
 - **Login (`/login`):** Split-screen glassmorphism design for returning guests, featuring traditional email/password and social login options (Google & Facebook).
@@ -39,10 +39,10 @@ The `Manager_Dash` frontend is built with a modern, responsive design and includ
 
 ### Installation & Setup
 
-1. Clone the repository and switch to the `Manager_Dash` branch:
+1. Clone the repository and switch to the `Customer_Web` branch:
    ```bash
    git clone <repository-url>
-   git checkout Manager_Dash
+   git checkout Customer_Web
    ```
 
 2. Navigate to the frontend directory:
