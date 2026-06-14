@@ -31,8 +31,15 @@ const DashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const notifications = [
+    { id: 1, title: 'New Booking', desc: 'Room 301 reserved for 2 nights.', time: '5m ago', unread: true },
+    { id: 2, title: 'Low Stock Alert', desc: 'Towels in Housekeeping below minimum.', time: '1h ago', unread: true },
+    { id: 3, title: 'Staff Update', desc: 'Nadeeka requested leave for 20th Jun.', time: '2h ago', unread: false },
+  ];
 
   const currentPage = navItems.find(item => item.path === location.pathname);
 
@@ -177,14 +184,49 @@ const DashboardLayout = ({ children }) => {
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-3">
-            <button className="relative p-2.5 rounded-xl bg-stone-100 text-emerald-900 hover:bg-amber-50 hover:text-amber-600 transition-all">
+          <div className="flex items-center gap-3 relative">
+            <button 
+              onClick={() => setIsNotifOpen(!isNotifOpen)}
+              className="relative p-2.5 rounded-xl bg-stone-100 text-emerald-900 hover:bg-amber-50 hover:text-amber-600 transition-all"
+            >
               <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
+              {notifications.some(n => n.unread) && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
+              )}
             </button>
-            <div className="w-9 h-9 rounded-full bg-emerald-950 flex items-center justify-center text-amber-500 font-bold text-sm shadow">
+
+            {/* Notification Dropdown */}
+            {isNotifOpen && (
+              <>
+                <div className="fixed inset-0 z-20" onClick={() => setIsNotifOpen(false)} />
+                <div className="absolute top-full right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-stone-100 z-30 overflow-hidden animate-in fade-in slide-in-from-top-2">
+                  <div className="p-4 border-b border-stone-100 flex items-center justify-between bg-stone-50">
+                    <h3 className="font-bold text-emerald-950">Notifications</h3>
+                    <span className="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
+                      {notifications.filter(n => n.unread).length} New
+                    </span>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
+                    {notifications.map(n => (
+                      <div key={n.id} className={`p-4 border-b border-stone-50 hover:bg-stone-50 transition-colors cursor-pointer ${n.unread ? 'bg-amber-50/30' : ''}`}>
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className={`text-sm ${n.unread ? 'font-bold text-emerald-950' : 'font-semibold text-stone-600'}`}>{n.title}</h4>
+                          <span className="text-[10px] font-bold text-stone-400">{n.time}</span>
+                        </div>
+                        <p className="text-xs text-stone-500">{n.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="p-3 text-center border-t border-stone-100 hover:bg-stone-50 transition-colors cursor-pointer">
+                    <span className="text-xs font-bold text-emerald-600">Mark all as read</span>
+                  </div>
+                </div>
+              </>
+            )}
+
+            <Link to="/profile" className="w-9 h-9 rounded-full bg-emerald-950 flex items-center justify-center text-amber-500 font-bold text-sm shadow hover:scale-105 transition-transform">
               M
-            </div>
+            </Link>
           </div>
         </header>
 
