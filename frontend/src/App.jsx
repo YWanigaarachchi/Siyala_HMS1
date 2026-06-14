@@ -14,6 +14,7 @@ import EmployeeManagement from './pages/manager/EmployeeManagement';
 import Finance from './pages/manager/Finance';
 import Analytics from './pages/manager/Analytics';
 import Settings from './pages/manager/Settings';
+import Profile from './pages/manager/Profile';
 
 // Auth pages (kept from customer)
 import Login from './pages/customer/Login';
@@ -30,6 +31,7 @@ const ManagerApp = () => (
       <Route path="/finance" element={<Finance />} />
       <Route path="/analytics" element={<Analytics />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   </DashboardLayout>
 );
