@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }) => {
           <img src="/logo.png" alt="Siyala" className="relative z-10 w-full h-full object-cover rounded-full border border-amber-500/20 shadow-2xl" />
         </div>
         <h1 className="text-amber-500 font-serif font-bold tracking-[0.3em] uppercase text-3xl">SIYALA</h1>
-        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Manager Portal</p>
+        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Manager Dashboard</p>
       </div>
 
       {/* ─── Mobile Backdrop ─── */}
@@ -84,7 +84,7 @@ const DashboardLayout = ({ children }) => {
           {isSidebarOpen && (
             <div className="overflow-hidden">
               <p className="text-amber-500 font-serif font-bold text-lg leading-tight tracking-wide">SIYALA</p>
-              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Manager Portal</p>
+              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Manager Dashboard</p>
             </div>
           )}
         </div>
