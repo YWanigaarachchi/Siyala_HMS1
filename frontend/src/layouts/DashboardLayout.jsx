@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -30,13 +30,31 @@ const navItems = [
 const DashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
   const currentPage = navItems.find(item => item.path === location.pathname);
 
+  useEffect(() => {
+    // Show splash screen on initial load
+    const splash = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(splash);
+  }, []);
+
   return (
     <div className="flex min-h-screen bg-stone-100">
+
+      {/* ─── Splash Screen ─── */}
+      <div className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-emerald-950 transition-all duration-700 ${isLoading ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+        <div className="relative w-28 h-28 mb-6">
+          <div className="absolute -inset-5 border-[3px] border-emerald-900/40 border-t-amber-500 border-r-amber-500 rounded-full animate-spin" />
+          <div className="absolute inset-0 bg-amber-500/20 rounded-full blur-2xl animate-pulse" />
+          <img src="/logo.png" alt="Siyala" className="relative z-10 w-full h-full object-cover rounded-full border border-amber-500/20 shadow-2xl" />
+        </div>
+        <h1 className="text-amber-500 font-serif font-bold tracking-[0.3em] uppercase text-3xl">SIYALA</h1>
+        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Manager Dashboard</p>
+      </div>
 
       {/* ─── Mobile Backdrop ─── */}
       {isMobileOpen && (
@@ -66,7 +84,7 @@ const DashboardLayout = ({ children }) => {
           {isSidebarOpen && (
             <div className="overflow-hidden">
               <p className="text-amber-500 font-serif font-bold text-lg leading-tight tracking-wide">SIYALA</p>
-              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Manager Portal</p>
+              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Manager Dashboard</p>
             </div>
           )}
         </div>
