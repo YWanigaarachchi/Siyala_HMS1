@@ -40,6 +40,21 @@ const BarPair = ({ rev, exp, label }) => (
 
 const Finance = () => {
   const [period, setPeriod] = useState('This Month');
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExport = () => {
+    setIsExporting(true);
+    setTimeout(() => {
+      const blob = new Blob(['Mock Finance Report Data'], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Siyala_Finance_Report_H1.csv';
+      a.click();
+      window.URL.revokeObjectURL(url);
+      setIsExporting(false);
+    }, 1500);
+  };
 
   const totalRevenue = revenueData.reduce((a, b) => a + b, 0);
   const totalExpenses = expenseData.reduce((a, b) => a + b, 0);
@@ -62,8 +77,16 @@ const Finance = () => {
           <h1 className="text-2xl font-bold text-emerald-950">Finance</h1>
           <p className="text-stone-400 text-sm mt-1">Financial overview, revenue tracking, and expense management.</p>
         </div>
-        <button className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg">
-          <Download className="w-4 h-4" /> Export Report
+        <button 
+          onClick={handleExport}
+          disabled={isExporting}
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg disabled:opacity-70"
+        >
+          {isExporting ? (
+            <><div className="w-4 h-4 border-2 border-amber-400 border-t-transparent rounded-full animate-spin" /> Exporting...</>
+          ) : (
+            <><Download className="w-4 h-4" /> Export Report</>
+          )}
         </button>
       </div>
 

@@ -181,6 +181,17 @@ const Settings = () => {
         </div>
       </Section>
 
+      {/* Toast Notification */}
+      <div className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 bg-emerald-950 text-white px-6 py-4 rounded-2xl shadow-2xl transition-all duration-300 ${saved ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0 pointer-events-none'}`}>
+        <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+          <Check className="w-5 h-5" />
+        </div>
+        <div>
+          <p className="font-bold text-sm">Settings Saved</p>
+          <p className="text-xs text-emerald-100/60">Your preferences have been updated successfully.</p>
+        </div>
+      </div>
+
     </div>
   );
 };

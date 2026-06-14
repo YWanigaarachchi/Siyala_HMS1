@@ -46,6 +46,7 @@ const InventoryManagement = () => {
   const [inventory, setInventory] = useState(initialInventory);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
+  const [showAddModal, setShowAddModal] = useState(false);
 
   const lowStock = inventory.filter(i => i.stock < i.minStock);
 
@@ -66,7 +67,10 @@ const InventoryManagement = () => {
           <h1 className="text-2xl font-bold text-emerald-950">Inventory Management</h1>
           <p className="text-stone-400 text-sm mt-1">Track supplies and manage stock levels across all properties.</p>
         </div>
-        <button className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg">
+        <button 
+          onClick={() => setShowAddModal(true)}
+          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-950 text-amber-400 font-bold text-sm rounded-xl hover:bg-emerald-800 transition-all shadow-lg"
+        >
           <Plus className="w-4 h-4" /> Add Item
         </button>
       </div>
@@ -168,6 +172,64 @@ const InventoryManagement = () => {
           </table>
         </div>
       </div>
+
+      {/* Add Item Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-sm" onClick={() => setShowAddModal(false)} />
+          <div className="relative bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl animate-in zoom-in-95">
+            <h2 className="text-2xl font-serif font-bold text-emerald-950 mb-1">Add Inventory Item</h2>
+            <p className="text-stone-400 text-sm mb-6">Enter details for the new stock item.</p>
+            
+            <form onSubmit={(e) => { e.preventDefault(); setShowAddModal(false); }} className="space-y-4">
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Item Name</label>
+                <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Category</label>
+                  <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                    {CATEGORIES.filter(c => c !== 'All').map(d => <option key={d}>{d}</option>)}
+                  </select>
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Unit Type</label>
+                  <input required placeholder="e.g., pcs, kg, bottles" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Initial Stock</label>
+                  <input required type="number" min="0" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className="text-sm font-semibold text-emerald-950">Min Stock (Alert)</label>
+                  <input required type="number" min="0" className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Supplier</label>
+                <input required className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50" />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-sm font-semibold text-emerald-950">Location</label>
+                <select className="w-full px-4 py-2 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50">
+                  <option>Kandy</option>
+                  <option>Hikkaduwa</option>
+                  <option>Both</option>
+                </select>
+              </div>
+
+              <div className="pt-4 flex gap-3">
+                <button type="button" onClick={() => setShowAddModal(false)} className="flex-1 py-2.5 rounded-xl font-bold text-sm text-stone-500 hover:bg-stone-100 transition-colors">Cancel</button>
+                <button type="submit" className="flex-1 py-2.5 rounded-xl font-bold text-sm bg-amber-500 text-emerald-950 hover:bg-amber-400 transition-colors">Add Item</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
