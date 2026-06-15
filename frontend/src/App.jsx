@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { ArrowUp, MessageCircle } from 'lucide-react';
 import { LanguageProvider } from './context/LanguageContext';
 
@@ -45,6 +45,18 @@ import ManagerFinance from './pages/manager/Finance';
 import ManagerAnalytics from './pages/manager/Analytics';
 import ManagerSettings from './pages/manager/Settings';
 import ManagerProfile from './pages/manager/Profile';
+
+// =====================
+// Customer Dashboard Pages
+// =====================
+import CustomerDashLayout from './layouts/CustomerDashLayout';
+import CustomerDashHome from './pages/customer_dash/CustomerDashHome';
+import MyBookings from './pages/customer_dash/MyBookings';
+import BookRoom from './pages/customer_dash/BookRoom';
+import MyProfile from './pages/customer_dash/MyProfile';
+import PaymentHistory from './pages/customer_dash/PaymentHistory';
+import SupportTickets from './pages/customer_dash/SupportTickets';
+import CustomerSettings from './pages/customer_dash/CustomerSettings';
 
 // =====================
 // Helper Components
@@ -164,6 +176,21 @@ const ManagerApp = () => (
   </DashboardLayout>
 );
 
+const CustomerDashboardApp = () => (
+  <CustomerDashLayout>
+    <Routes>
+      <Route path="/" element={<CustomerDashHome />} />
+      <Route path="/my-bookings" element={<MyBookings />} />
+      <Route path="/book-room" element={<BookRoom />} />
+      <Route path="/profile" element={<MyProfile />} />
+      <Route path="/payments" element={<PaymentHistory />} />
+      <Route path="/support" element={<SupportTickets />} />
+      <Route path="/settings" element={<CustomerSettings />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  </CustomerDashLayout>
+);
+
 // =====================
 // Main App Component
 // =====================
@@ -175,6 +202,7 @@ function App() {
         <Routes>
           <Route path="/admin/*" element={<AdminApp />} />
           <Route path="/manager/*" element={<ManagerApp />} />
+          <Route path="/dashboard/*" element={<CustomerDashboardApp />} />
           <Route path="/*" element={<CustomerApp />} />
         </Routes>
       </Router>
