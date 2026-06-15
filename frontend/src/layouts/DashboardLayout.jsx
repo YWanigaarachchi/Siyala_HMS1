@@ -14,6 +14,9 @@ import {
   Bell,
   LogOut,
   ChevronRight,
+  UserCog,
+  ShieldCheck,
+  HeartHandshake
 } from 'lucide-react';
 
 const navItems = [
@@ -21,9 +24,12 @@ const navItems = [
   { path: '/hotel-management', label: 'Hotel Management', icon: Building2 },
   { path: '/reservation-management', label: 'Reservations', icon: CalendarCheck },
   { path: '/inventory-management', label: 'Inventory', icon: Package },
-  { path: '/employee-management', label: 'Employees', icon: Users },
   { path: '/finance', label: 'Finance', icon: TrendingUp },
   { path: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { path: '/admin-management', label: 'Admins', icon: ShieldCheck },
+  { path: '/manager-management', label: 'Managers', icon: UserCog },
+  { path: '/employee-management', label: 'Employees', icon: Users },
+  { path: '/customer-management', label: 'Customers', icon: HeartHandshake },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];
 
