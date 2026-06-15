@@ -1,37 +1,45 @@
-# Siyala HMS - Customer Web Application
+# Siyala HMS - Unified Hotel Management System
 
-🛎️ Siyala is a comprehensive, multi-chain Hotel Management System built for Sri Lankan hospitality. Seamlessly manage multi-location hotels (e.g., Kandy & Hikkaduwa) from a centralized dashboard. Features advanced kitchen inventory with local vendor tracking, dynamic scaling from small Airbnbs to heritage hotels, and multi-tier analytics.
+🛎️ Siyala is a comprehensive, multi-chain Hotel Management System built for Sri Lankan hospitality. Seamlessly manage multi-location hotels (e.g., Kandy Heritage & Hikkaduwa Oceanfront) from a centralized infrastructure. The system is designed to dynamically scale from boutique Airbnbs to large heritage hotels.
 
-## About This Branch (`Customer_Web`)
+## About This Branch (`main`)
 
-This branch contains the customer-facing web application where guests can:
-- Explore hotel locations, rooms, and amenities.
-- Book rooms and manage reservations seamlessly.
-- View local experiences, dining options, and special offers.
-- Manage their customer profiles and booking history.
+This is the unified `main` branch. It integrates all four major portals of the Siyala HMS into a single React application. Everything runs seamlessly on one development server through nested routing.
 
-## Application Structure & Features
+## 🔗 Portals & Routing
 
-The `Customer_Web` frontend is built with a modern, responsive design and includes the following key areas:
+The system is cleanly divided into four distinct areas:
 
-### 1. Global Components
-- **Navbar & Footer:** Sticky navigation and detailed footer available across all main pages.
-- **Language Support:** Built-in Context Provider for multi-language functionality.
-- **Floating WhatsApp:** Quick connect button fixed at the bottom right for immediate guest assistance.
-- **Scroll to Top:** Convenient navigation for longer pages.
-- **Splash Screen:** Engaging initial loading animation.
+### 1. Customer Website (`/`)
+The public-facing website for guest acquisition and branding.
+* **Features:** Landing page, About Us (Heritage & Architecture), Travel Guide (Curated Local Experiences), Contact & Location Maps, and split-screen Authentication (Login/Register).
+* **Routing:** `/*` (e.g., `/`, `/about`, `/travel`, `/login`)
 
-### 2. Main Pages
-- **Home (`/`):** The landing page featuring a live Sri Lankan clock, dynamic background images, location highlights (Kandy Heritage & Hikkaduwa Oceanfront), signature amenities, special offers, and a guest reviews module.
-- **About Us (`/about`):** Details the Siyala philosophy, architectural legacy, and a timeline of the brand's journey since 2015.
-- **Travel Guide (`/travel`):** Curated local experiences categorized by Culture, Highlands, Wildlife, and Coastal areas, along with transport service arrangements.
-- **Contact (`/contact`):** Integrated contact form, quick WhatsApp connect, hotel contact details, and an embedded Google Map of the headquarters.
+### 2. Customer Dashboard (`/dashboard/`)
+The private portal for authenticated guests to manage their relationship with Siyala.
+* **Features:** Booking management (My Bookings), Room Booking interface, Payment History, Customer Support Tickets, and comprehensive Account/Notification Settings.
+* **Routing:** `/dashboard/*` (e.g., `/dashboard/`, `/dashboard/my-bookings`, `/dashboard/settings`)
 
-### 3. Authentication
-- **Login (`/login`):** Split-screen glassmorphism design for returning guests, featuring traditional email/password and social login options (Google & Facebook).
-- **Register (`/register`):** Account creation page with terms of service agreement, mirroring the premium design of the login page.
+### 3. Manager Portal (`/manager/`)
+The operational portal for Branch Managers to oversee daily hotel activities.
+* **Features:** Live occupancy analytics, Hotel configuration, Reservation management, Employee oversight, Inventory tracking, and localized Financial reports.
+* **Routing:** `/manager/*` (e.g., `/manager/`, `/manager/inventory-management`, `/manager/finance`)
 
-## Getting Started
+### 4. Admin Portal (`/admin/`)
+The centralized command center for system administrators and hotel chain owners.
+* **Features:** Global analytics across all branches, Multi-hotel management, Cross-branch inventory, Manager/Employee creation, Customer CRM, and high-level Finance.
+* **Routing:** `/admin/*` (e.g., `/admin/`, `/admin/hotel-management`, `/admin/analytics`)
+
+## 🛠️ Application Architecture
+
+* **Unified `App.jsx`**: Controls the top-level routing, directing traffic to `CustomerApp`, `CustomerDashboardApp`, `ManagerApp`, or `AdminApp` based on the URL path.
+* **Layouts**: 
+  * `DashboardLayout.jsx`: The standardized sidebar-navigation wrapper used by Admin and Manager portals.
+  * `CustomerDashLayout.jsx`: A refined sidebar wrapper tailored specifically for the Customer Dashboard.
+* **Global Context**: `LanguageContext` enables dynamic switching between English, Sinhala, and Tamil across all portals.
+* **Design System**: A consistent Emerald and Amber color palette is used throughout. It utilizes modern glassmorphism, responsive grids, and Recharts for live data visualization.
+
+## 🚀 Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v16 or higher)
@@ -39,30 +47,37 @@ The `Customer_Web` frontend is built with a modern, responsive design and includ
 
 ### Installation & Setup
 
-1. Clone the repository and switch to the `Customer_Web` branch:
+1. Clone the repository and ensure you are on the `main` branch:
    ```bash
    git clone <repository-url>
-   git checkout Customer_Web
+   git checkout main
    ```
 
-2. Navigate to the frontend directory:
+2. Navigate to the `frontend` directory (crucial):
    ```bash
    cd frontend
    ```
 
-3. Install the dependencies:
+3. Install all dependencies:
    ```bash
    npm install
    ```
 
-4. Start the development server:
+4. Start the Vite development server:
    ```bash
    npm run dev
    ```
 
-### Technologies Used
-- **Frontend Framework:** React + Vite
-- **Styling:** Tailwind CSS
-- **Routing:** React Router DOM
+5. Access the portals in your browser:
+   * **Main Site:** `http://localhost:5173/`
+   * **Customer Dash:** `http://localhost:5173/dashboard/`
+   * **Manager Portal:** `http://localhost:5173/manager/`
+   * **Admin Portal:** `http://localhost:5173/admin/`
+
+## 💻 Technologies Used
+- **Frontend Framework:** React 18 + Vite
+- **Styling:** Tailwind CSS (with arbitrary value support and complex grid layouts)
+- **Routing:** React Router DOM v6
 - **Icons:** Lucide React
-- **Language:** JavaScript
+- **Data Visualization:** Recharts
+- **Language:** Modern JavaScript (ES6+)
