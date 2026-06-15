@@ -34,14 +34,15 @@ const SettingRow = ({ label, description, control }) => (
   </div>
 );
 
-const InputRow = ({ label, type = 'text', defaultValue, placeholder }) => (
+const InputRow = ({ label, type = 'text', defaultValue, placeholder, disabled }) => (
   <div className="space-y-1.5">
     <label className="text-sm font-semibold text-emerald-950">{label}</label>
     <input
       type={type}
       defaultValue={defaultValue}
       placeholder={placeholder}
-      className="w-full px-4 py-2.5 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50"
+      disabled={disabled}
+      className={`w-full px-4 py-2.5 text-sm border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400 bg-stone-50 ${disabled ? 'opacity-60 cursor-not-allowed text-stone-500' : ''}`}
     />
   </div>
 );
@@ -93,16 +94,15 @@ const Settings = () => {
           <div>
             <p className="font-bold text-emerald-950">Hotel Manager</p>
             <p className="text-sm text-stone-400">manager@siyala.lk</p>
-            <button className="text-xs font-bold text-amber-600 hover:text-amber-700 mt-1">Change Avatar</button>
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <InputRow label="Full Name" defaultValue="Hotel Manager" />
-          <InputRow label="Email Address" type="email" defaultValue="manager@siyala.lk" />
-          <InputRow label="Phone Number" type="tel" defaultValue="+94 77 123 4567" />
-          <InputRow label="Current Password" type="password" placeholder="••••••••" />
-          <InputRow label="New Password" type="password" placeholder="••••••••" />
-          <InputRow label="Confirm Password" type="password" placeholder="••••••••" />
+          <InputRow label="Full Name" defaultValue="Hotel Manager" disabled />
+          <InputRow label="Email Address" type="email" defaultValue="manager@siyala.lk" disabled />
+          <InputRow label="Phone Number" type="tel" defaultValue="+94 77 123 4567" disabled />
+          <InputRow label="Current Password" type="password" placeholder="••••••••" disabled />
+          <InputRow label="New Password" type="password" placeholder="••••••••" disabled />
+          <InputRow label="Confirm Password" type="password" placeholder="••••••••" disabled />
         </div>
       </Section>
 
