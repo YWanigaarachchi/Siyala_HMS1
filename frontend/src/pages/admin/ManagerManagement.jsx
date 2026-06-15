@@ -9,6 +9,7 @@ import {
   Phone,
   Mail,
   Building,
+  CheckCircle,
 } from 'lucide-react';
 
 const branchOptions = ['All Branches', 'System Wide', 'Siyala Kandy', 'Siyala Hikkaduwa', 'Siyala Colombo', 'Siyala Ella'];
@@ -25,6 +26,7 @@ const ManagerManagement = () => {
   const [search, setSearch] = useState('');
   const [branchFilter, setBranchFilter] = useState('All Branches');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   const [newManager, setNewManager] = useState({
     name: '', role: '', branch: 'Siyala Kandy', phone: '', email: '',
   });
@@ -45,6 +47,8 @@ const ManagerManagement = () => {
     ]);
     setNewManager({ name: '', role: '', branch: 'Siyala Kandy', phone: '', email: '' });
     setIsModalOpen(false);
+    setToastMessage('Manager added successfully!');
+    setTimeout(() => setToastMessage(''), 3000);
   };
 
   return (
@@ -173,6 +177,14 @@ const ManagerManagement = () => {
             </div>
           </div>
         </>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-emerald-950 text-white px-5 py-3 rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-300">
+          <CheckCircle className="w-5 h-5 text-emerald-400" />
+          <span className="text-sm font-semibold">{toastMessage}</span>
+        </div>
       )}
     </div>
   );
