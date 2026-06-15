@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   DollarSign, 
   Users, 
@@ -6,7 +6,9 @@ import {
   UserCheck,
   TrendingUp,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  Plus,
+  X
 } from 'lucide-react';
 import { 
   LineChart, 
@@ -47,17 +49,36 @@ const recentBookings = [
 ];
 
 const AdminHome = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState('');
+
+  const openModal = (type) => {
+    setModalType(type);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="flex justify-between items-end">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
           <h2 className="text-2xl font-bold text-emerald-950">System Overview</h2>
           <p className="text-sm text-stone-500 mt-1">System-wide overview for all Siyala properties.</p>
         </div>
-        <button className="bg-amber-500 hover:bg-amber-600 text-emerald-950 px-4 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm">
-          Download Report
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button onClick={() => openModal('Manager')} className="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 px-3 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm flex items-center gap-1">
+            <Plus className="w-4 h-4" /> Manager
+          </button>
+          <button onClick={() => openModal('Admin')} className="bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm flex items-center gap-1">
+            <Plus className="w-4 h-4" /> Admin
+          </button>
+          <button onClick={() => openModal('Customer')} className="bg-amber-100 hover:bg-amber-200 text-amber-800 px-3 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm flex items-center gap-1">
+            <Plus className="w-4 h-4" /> Customer
+          </button>
+          <button className="bg-stone-800 hover:bg-stone-900 text-white px-4 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm sm:ml-2">
+            Download Report
+          </button>
+        </div>
       </div>
 
       {/* Metrics Cards */}
@@ -205,6 +226,53 @@ const AdminHome = () => {
           </table>
         </div>
       </div>
+
+      {/* Add User Modal */}
+      {isModalOpen && (
+        <>
+          <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm" onClick={() => setIsModalOpen(false)} />
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between p-6 border-b border-stone-100">
+                <h3 className="text-lg font-bold text-emerald-950">Add New {modalType}</h3>
+                <button onClick={() => setIsModalOpen(false)} className="p-2 rounded-xl hover:bg-stone-100 transition-colors">
+                  <X className="w-5 h-5 text-stone-500" />
+                </button>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-1.5">Full Name</label>
+                  <input type="text" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500" placeholder={`Enter ${modalType.toLowerCase()} name`} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-1.5">Email Address</label>
+                  <input type="email" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500" placeholder="name@example.com" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-stone-700 mb-1.5">Phone Number</label>
+                  <input type="text" className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500" placeholder="+94 7X XXX XXXX" />
+                </div>
+                {(modalType === 'Manager' || modalType === 'Admin') && (
+                  <div>
+                    <label className="block text-sm font-medium text-stone-700 mb-1.5">Assign Branch</label>
+                    <select className="w-full px-4 py-2.5 rounded-xl border border-stone-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 bg-white">
+                      <option>All Branches (System Wide)</option>
+                      <option>Siyala Kandy</option>
+                      <option>Siyala Hikkaduwa</option>
+                      <option>Siyala Colombo</option>
+                      <option>Siyala Ella</option>
+                    </select>
+                  </div>
+                )}
+              </div>
+              <div className="flex justify-end gap-3 p-6 border-t border-stone-100">
+                <button onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl border border-stone-200 text-sm font-semibold text-stone-600 hover:bg-stone-50 transition-colors">Cancel</button>
+                <button onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-emerald-950 text-sm font-semibold shadow-sm transition-colors">Add {modalType}</button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };
