@@ -14,6 +14,9 @@ import {
   Bell,
   LogOut,
   ChevronRight,
+  UserCog,
+  ShieldCheck,
+  HeartHandshake
 } from 'lucide-react';
 
 const navItems = [
@@ -21,9 +24,12 @@ const navItems = [
   { path: '/hotel-management', label: 'Hotel Management', icon: Building2 },
   { path: '/reservation-management', label: 'Reservations', icon: CalendarCheck },
   { path: '/inventory-management', label: 'Inventory', icon: Package },
-  { path: '/employee-management', label: 'Employees', icon: Users },
   { path: '/finance', label: 'Finance', icon: TrendingUp },
   { path: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { path: '/admin-management', label: 'Admins', icon: ShieldCheck },
+  { path: '/manager-management', label: 'Managers', icon: UserCog },
+  { path: '/employee-management', label: 'Employees', icon: Users },
+  { path: '/customer-management', label: 'Customers', icon: HeartHandshake },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];
 
@@ -60,7 +66,7 @@ const DashboardLayout = ({ children }) => {
           <img src="/logo.png" alt="Siyala" className="relative z-10 w-full h-full object-cover rounded-full border border-amber-500/20 shadow-2xl" />
         </div>
         <h1 className="text-amber-500 font-serif font-bold tracking-[0.3em] uppercase text-3xl">SIYALA</h1>
-        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Manager Dashboard</p>
+        <p className="text-emerald-300/50 tracking-widest text-xs uppercase mt-2">Admin Dashboard</p>
       </div>
 
       {/* ─── Mobile Backdrop ─── */}
@@ -91,7 +97,7 @@ const DashboardLayout = ({ children }) => {
           {isSidebarOpen && (
             <div className="overflow-hidden">
               <p className="text-amber-500 font-serif font-bold text-lg leading-tight tracking-wide">SIYALA</p>
-              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Manager Dashboard</p>
+              <p className="text-emerald-300/60 text-xs tracking-widest uppercase">Admin Dashboard</p>
             </div>
           )}
         </div>
@@ -132,11 +138,11 @@ const DashboardLayout = ({ children }) => {
           {isSidebarOpen && (
             <div className="flex items-center gap-3 px-3 py-3 rounded-xl bg-white/5 border border-white/10">
               <div className="w-9 h-9 rounded-full bg-amber-500 flex items-center justify-center text-emerald-950 font-bold text-sm shrink-0">
-                M
+                A
               </div>
               <div className="overflow-hidden flex-1">
-                <p className="text-white font-semibold text-sm truncate">Hotel Manager</p>
-                <p className="text-emerald-300/50 text-xs truncate">manager@siyala.lk</p>
+                <p className="text-white font-semibold text-sm truncate">System Admin</p>
+                <p className="text-emerald-300/50 text-xs truncate">admin@siyala.lk</p>
               </div>
             </div>
           )}
@@ -225,7 +231,7 @@ const DashboardLayout = ({ children }) => {
             )}
 
             <Link to="/profile" className="w-9 h-9 rounded-full bg-emerald-950 flex items-center justify-center text-amber-500 font-bold text-sm shadow hover:scale-105 transition-transform">
-              M
+              A
             </Link>
           </div>
         </header>
