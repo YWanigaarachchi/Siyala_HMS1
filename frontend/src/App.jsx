@@ -4,6 +4,13 @@ import { LanguageProvider } from './context/LanguageContext';
 
 import DashboardLayout from './layouts/DashboardLayout';
 import AdminHome from './pages/admin/AdminHome';
+import HotelManagement from './pages/admin/HotelManagement';
+import ReservationManagement from './pages/admin/ReservationManagement';
+import InventoryManagement from './pages/admin/InventoryManagement';
+import EmployeeManagement from './pages/admin/EmployeeManagement';
+import Finance from './pages/admin/Finance';
+import Analytics from './pages/admin/Analytics';
+import SettingsPage from './pages/admin/SettingsPage';
 
 function App() {
   return (
@@ -12,7 +19,13 @@ function App() {
         <DashboardLayout>
           <Routes>
             <Route path="/" element={<AdminHome />} />
-            {/* Catch-all route can be added here if needed, but for now we route / to AdminHome */}
+            <Route path="/hotel-management" element={<HotelManagement />} />
+            <Route path="/reservation-management" element={<ReservationManagement />} />
+            <Route path="/inventory-management" element={<InventoryManagement />} />
+            <Route path="/employee-management" element={<EmployeeManagement />} />
+            <Route path="/finance" element={<Finance />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<SettingsPage />} />
             <Route path="*" element={<AdminHome />} />
           </Routes>
         </DashboardLayout>
