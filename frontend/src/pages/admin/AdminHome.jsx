@@ -40,10 +40,10 @@ const occupancyData = [
 ];
 
 const recentBookings = [
-  { id: '#RES-1021', guest: 'Kamal Perera', room: 'Deluxe Suite', amount: 'LKR 45,000', status: 'Confirmed' },
-  { id: '#RES-1022', guest: 'Sarah Jenkins', room: 'Ocean View', amount: 'LKR 38,000', status: 'Pending' },
-  { id: '#RES-1023', guest: 'Nimal Silva', room: 'Standard', amount: 'LKR 15,000', status: 'Confirmed' },
-  { id: '#RES-1024', guest: 'Emma Watson', room: 'Presidential', amount: 'LKR 120,000', status: 'Cancelled' },
+  { id: '#RES-1021', branch: 'Siyala Kandy', guest: 'Kamal Perera', room: 'Deluxe Suite', amount: 'LKR 45,000', status: 'Confirmed' },
+  { id: '#RES-1022', branch: 'Siyala Hikkaduwa', guest: 'Sarah Jenkins', room: 'Ocean View', amount: 'LKR 38,000', status: 'Pending' },
+  { id: '#RES-1023', branch: 'Siyala Kandy', guest: 'Nimal Silva', room: 'Standard', amount: 'LKR 15,000', status: 'Confirmed' },
+  { id: '#RES-1024', branch: 'Siyala Colombo', guest: 'Emma Watson', room: 'Presidential', amount: 'LKR 120,000', status: 'Cancelled' },
 ];
 
 const AdminHome = () => {
@@ -52,8 +52,8 @@ const AdminHome = () => {
       {/* Welcome Section */}
       <div className="flex justify-between items-end">
         <div>
-          <h2 className="text-2xl font-bold text-emerald-950">Dashboard Overview</h2>
-          <p className="text-sm text-stone-500 mt-1">Welcome back! Here's what's happening at Siyala today.</p>
+          <h2 className="text-2xl font-bold text-emerald-950">System Overview</h2>
+          <p className="text-sm text-stone-500 mt-1">System-wide overview for all Siyala properties.</p>
         </div>
         <button className="bg-amber-500 hover:bg-amber-600 text-emerald-950 px-4 py-2 rounded-xl font-semibold shadow-sm transition-colors text-sm">
           Download Report
@@ -85,11 +85,11 @@ const AdminHome = () => {
             </div>
             <span className="flex items-center text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-full">
               <ArrowUpRight className="w-3 h-3 mr-1" />
-              8.2%
+              1 New
             </span>
           </div>
-          <h3 className="text-stone-500 text-sm font-medium">Active Bookings</h3>
-          <p className="text-2xl font-bold text-emerald-950 mt-1">142</p>
+          <h3 className="text-stone-500 text-sm font-medium">Total Properties</h3>
+          <p className="text-2xl font-bold text-emerald-950 mt-1">4 Active</p>
         </div>
 
         {/* Card 3 */}
@@ -146,7 +146,7 @@ const AdminHome = () => {
 
         {/* Occupancy Chart */}
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
-          <h3 className="text-lg font-bold text-emerald-950 mb-6">Weekly Occupancy</h3>
+          <h3 className="text-lg font-bold text-emerald-950 mb-6">Global Occupancy</h3>
           <div className="h-72 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={occupancyData}>
@@ -175,6 +175,7 @@ const AdminHome = () => {
             <thead>
               <tr className="bg-stone-50 text-stone-500 text-xs uppercase tracking-wider">
                 <th className="p-4 font-medium">Booking ID</th>
+                <th className="p-4 font-medium">Branch</th>
                 <th className="p-4 font-medium">Guest Name</th>
                 <th className="p-4 font-medium">Room Type</th>
                 <th className="p-4 font-medium">Amount</th>
@@ -185,6 +186,7 @@ const AdminHome = () => {
               {recentBookings.map((booking, idx) => (
                 <tr key={idx} className="hover:bg-stone-50/50 transition-colors">
                   <td className="p-4 text-sm font-semibold text-emerald-950">{booking.id}</td>
+                  <td className="p-4 text-sm font-medium text-amber-600">{booking.branch}</td>
                   <td className="p-4 text-sm text-stone-600">{booking.guest}</td>
                   <td className="p-4 text-sm text-stone-600">{booking.room}</td>
                   <td className="p-4 text-sm font-medium text-emerald-950">{booking.amount}</td>
