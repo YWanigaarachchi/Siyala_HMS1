@@ -8,6 +8,7 @@ import {
   Mail,
   Star,
   Globe,
+  CheckCircle,
 } from 'lucide-react';
 
 const initialCustomers = [
@@ -22,6 +23,7 @@ const CustomerManagement = () => {
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('All');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   const [newCustomer, setNewCustomer] = useState({
     name: '', type: 'Regular', country: 'Sri Lanka', phone: '', email: '', bookings: 0,
   });
@@ -40,6 +42,8 @@ const CustomerManagement = () => {
     ]);
     setNewCustomer({ name: '', type: 'Regular', country: 'Sri Lanka', phone: '', email: '', bookings: 0 });
     setIsModalOpen(false);
+    setToastMessage('Customer added successfully!');
+    setTimeout(() => setToastMessage(''), 3000);
   };
 
   return (
@@ -177,6 +181,14 @@ const CustomerManagement = () => {
             </div>
           </div>
         </>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-emerald-950 text-white px-5 py-3 rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-5 duration-300">
+          <CheckCircle className="w-5 h-5 text-emerald-400" />
+          <span className="text-sm font-semibold">{toastMessage}</span>
+        </div>
       )}
     </div>
   );
