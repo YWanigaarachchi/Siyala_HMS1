@@ -1,4 +1,5 @@
 # Siyala HMS - Unified Hotel Management System
+![Uploading image.png…]()
 
 🛎️ Siyala is a comprehensive, multi-chain Hotel Management System built for Sri Lankan hospitality. Seamlessly manage multi-location hotels (e.g., Kandy Heritage & Hikkaduwa Oceanfront) from a centralized infrastructure. The system is designed to dynamically scale from boutique Airbnbs to large heritage hotels.
 
